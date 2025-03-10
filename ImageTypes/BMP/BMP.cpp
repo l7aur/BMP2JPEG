@@ -1,5 +1,5 @@
 #include "BMP.h"
-#include "../../Base/Constants.h"
+#include "../../Core/Constants.h"
 
 BMP::BMP(const char *filePath)
     : Image(filePath)

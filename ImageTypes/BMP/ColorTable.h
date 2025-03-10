@@ -39,7 +39,7 @@ public:
 
     int initFrom(const int fd);
 
-    Pixel at(size_t i);
+    Pixel at(size_t i) const;
 
     void print();
 };

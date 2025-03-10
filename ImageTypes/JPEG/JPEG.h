@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Base/Image.h"
+#include "../../Core/Image.h"
 
 class JPEG : public Image
 {

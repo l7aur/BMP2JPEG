@@ -6,13 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(SDL2 REQUIRED)
 
 add_executable(BMP2JPEG main.cpp
-        Base/Image.cpp
-        Base/Image.h
-        Base/ImageRenderer.cpp
-        Base/ImageRenderer.h
+        Core/Image.cpp
+        Core/Image.h
+        Core/ImageRenderer.cpp
+        Core/ImageRenderer.h
         ImageTypes/BMP/BMP.cpp
         ImageTypes/BMP/BMP.h
-        Base/Constants.h
+        Core/Constants.h
         ImageTypes/BMP/ColorTable.cpp
         ImageTypes/BMP/ColorTable.h
         ImageTypes/BMP/PixelData.cpp

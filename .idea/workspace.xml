@@ -29,9 +29,34 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="test2">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="gitignore update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base/Constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Constants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base/Image.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Image.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base/Image.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Image.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/ImageRenderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base/ImageRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/ImageRenderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/JPEG/JPEG.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/JPEG/JPEG.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-c0fd395135ed9f24a2d1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-03-10T19-44-38-0465.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-BMP2JPEG-Debug-3465661fb209091fba03.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +90,29 @@
   }
 }]]></component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/l7aur/CLionProjects/BMP2JPEG/main.cpp" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -123,7 +170,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741633140719</updated>
-      <workItem from="1741633143176" duration="5394000" />
+      <workItem from="1741633143176" duration="8828000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -133,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741638404691</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="gitignore update">
+      <option name="closed" value="true" />
+      <created>1741638572710</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741638572710</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +212,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test2" />
-    <option name="LAST_COMMIT_MESSAGE" value="test2" />
+    <MESSAGE value="gitignore update" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

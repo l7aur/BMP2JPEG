@@ -11,8 +11,7 @@ ImageRenderer::~ImageRenderer()
 
 void ImageRenderer::runGameLoop() const
 {
-    SDL_Rect displayRectangle = {0, 0, textureWidth, textureHeight};
-    std::cout << textureWidth << ' ' << textureHeight << '\n';
+    const SDL_Rect displayRectangle = {0, 0, textureWidth, textureHeight};
     bool running = true;
     SDL_Event event;
     while (running)
@@ -65,18 +64,13 @@ int ImageRenderer::initTexture(const int imageWidth, const int imageHeight, cons
         SDL_TEXTUREACCESS_STREAMING,
         imageWidth,
         imageHeight);
-
-    return SDL_UpdateTexture(texture, nullptr, pixels, imageWidth * sizeof(uint32_t));
+    // for (int i = 0; i < imageWidth * imageHeight; i++) {
+    //     if (i %imageWidth==0)
+    //         printf("\n");
+    //     printf("%08x ", pixels[i]);
+    // }
+    return SDL_UpdateTexture(texture, nullptr, pixels, imageWidth * 4);//imageWidth * static_cast<int>(sizeof(uint32_t)));
 }
-
-//     SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, HEIGHT);
-//     Uint32 *pixels = new Uint32[WINDOW_WIDTH * IMAGE_HEIGHT];
-//     for (int i = 0; i < IMAGE_HEIGHT; i++)
-//         for (int j = 0; j < WINDOW_WIDTH; j++)
-//         {
-//             int index = i * WINDOW_WIDTH + j;
-//             pixels[index] = 0xFF'00'00'00;
-//         }
 
 int ImageRenderer::initWindow()
 {

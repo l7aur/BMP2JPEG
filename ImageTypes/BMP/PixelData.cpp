@@ -111,6 +111,7 @@ const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight
     auto *formatted = new uint32_t[dataSize];
     std::cout << imageWidth << ' ' << imageHeight << '\n';
     // unsigned int lineCounter = 0;
+    std::cout << "datasize: " << dataSize << '\n';
     for (size_t i = 0; i < dataSize; i++)
     {
         // if (byteWidth * 8 %  != 0 && i * 4 >= lineCounter * byteWidth + imageWidth) // padding
@@ -124,11 +125,12 @@ const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight
         //     std::cout << "counter padding " << c << '\n';
         //     continue;
         // }
-        Pixel p = colorTab->at(data[i]);
-        std::cout << static_cast<int>(data[i]) << ' ' << p << '\n';
+        const Pixel p = colorTab->at(data[i]);
+        // std::cout << static_cast<int>(data[i]) << ' ' << p << '\n';
         formatted[i] = (p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
     }
-    // for (size_t i = 0; i < 438; i++)
-    // formatted[i] = 0xFF'00'00'FF;
+    // for (size_t j = 1; j < 10;j++)
+    //     for (size_t i = 0; i < 438; i++)
+    //         formatted[i + j * 438] = 0xFF'00'00'FF;
     return formatted;
 }

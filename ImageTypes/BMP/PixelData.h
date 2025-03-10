@@ -2,10 +2,6 @@
 
 #include <cstdint>
 #include <cstddef>
-#include <iostream>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string>
 
 #include "ColorTable.h"
 
@@ -29,15 +25,15 @@ public:
     PIXEL_DATA_ENCODING encoding{BW1};
     float indexStep{0.0f};
 
-    PixelData(const size_t s);
+    explicit PixelData(size_t s);
     ~PixelData();
-    int initFrom(const int fd, const uint16_t bitCount, const uint32_t compression);
+    int initFrom(int fd, uint16_t bitCount, uint32_t compression);
     void print() const;
-    size_t getSize() const { return dataSize; }
-    const uint32_t *getAndFormatData(const int imageWidth, const int imageHeight, const int byteWidth) const;
+    [[nodiscard]] size_t getSize() const { return dataSize; }
+    [[nodiscard]] const uint32_t *getAndFormatData(int imageWidth, int imageHeight, int byteWidth) const;
 
 private:
-    int setEncoding(const uint16_t bitCount, const uint32_t compression);
-    int initColorTable(const int fd, const uint16_t bitCount);
-    const uint32_t* format_C8(const int imageWidth, const int imageHeight, const int byteWidth) const;
+    int setEncoding(uint16_t bitCount, uint32_t compression);
+    int initColorTable(int fd, uint16_t bitCount);
+    [[nodiscard]] const uint32_t* format_C8(int imageWidth, int imageHeight, int byteWidth) const;
 };

@@ -1,5 +1,5 @@
 #include "ImageTypes/BMP/BMP.h"
-#include "Base/ImageRenderer.h"
+#include "Core/ImageRenderer.h"
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
         std::cerr << "Exiting program, image of unsupported format!\n";
         return -1;
     }
-    bmpImg.print();
+    // bmpImg.print();
 
     ImageRenderer bmpRenderer{};
     if (bmpRenderer.init() < 0)

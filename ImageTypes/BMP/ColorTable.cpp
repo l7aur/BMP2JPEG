@@ -10,10 +10,9 @@ int ColorTable::initFrom(const int fd)
     return 0;
 }
 
-Pixel ColorTable::at(size_t i)
-{
+Pixel ColorTable::at(const size_t i) const {
     if (i > tableSize)
-        return Pixel{};
+        return Pixel{0xFF, 0xFF, 0xFF, 0xFF};
     return Pixel{data[i], data[i + 1], data[i + 2], (data[i + 3] != 0x00) ? data[i + 3] : static_cast<uint8_t>(0xFF)};
 }
 

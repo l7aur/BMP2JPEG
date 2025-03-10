@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Base/Image.h"
+#include "../../Core/Image.h"
 #include "FileHeader.h"
 #include "DIBHeader.h"
 #include "PixelData.h"
