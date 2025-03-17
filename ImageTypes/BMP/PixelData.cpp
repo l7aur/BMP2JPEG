@@ -93,12 +93,12 @@ void PixelData::print() const
     colorTab->print();
 }
 
-const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imageHeight, const int byteWidth) const
+const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imageHeight) const
 {
     switch (encoding)
     {
     case C8:
-        return format_C8(imageWidth, imageHeight, byteWidth);
+        return format_C8(imageWidth, imageHeight, Util::computeAlignment(imageWidth));
     default:
         break;
     }
@@ -106,31 +106,28 @@ const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imag
     return nullptr;
 }
 
-const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int byteWidth) const
-{
-    auto *formatted = new uint32_t[dataSize];
-    std::cout << imageWidth << ' ' << imageHeight << '\n';
-    // unsigned int lineCounter = 0;
-    std::cout << "datasize: " << dataSize << '\n';
-    for (size_t i = 0; i < dataSize; i++)
-    {
-        // if (byteWidth * 8 %  != 0 && i * 4 >= lineCounter * byteWidth + imageWidth) // padding
-        // {
-        //     std::cout << "last pixel index: " << i << ' ' << byteWidth << '\n';
-        //     int c = 0;
-        //     lineCounter++;
-        //     while (i < formattedSize && i <= lineCounter * static_cast<unsigned int>(byteWidth))
-        //         c++, formatted[i++] = 0xFF'FF'FF'FF;
-        //     // i--;
-        //     std::cout << "counter padding " << c << '\n';
-        //     continue;
-        // }
-        const Pixel p = colorTab->at(data[i]);
-        // std::cout << static_cast<int>(data[i]) << ' ' << p << '\n';
-        formatted[i] = (p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
+const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int alignment) const {
+    const int NUMBER_OF_PIXELS = alignment * imageHeight;
+    auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
+    unsigned int columnCounter = 0;
+    bool addPadding = false;
+    std::cout << "img " <<imageWidth << '\n';
+    for (int i = NUMBER_OF_PIXELS - 1; i >= 0; --i, ++columnCounter) {
+        if (!addPadding) {
+            // const Pixel p = colorTab->at(data[]);
+            pixels[i] = 0xff'ff'ff'ff;//(p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
+            addPadding = columnCounter == (imageWidth - 1);
+        }
+        else {
+            pixels[i] = 0x00'00'00'00;
+            if (columnCounter == alignment - 1) {
+                columnCounter = 0;
+                addPadding = false;
+            }
+        }
+        // if (pixels[i] == 0)
+            // std::cerr << NUMBER_OF_PIXELS - i  - 1 << "Pixel data is empty!\n";
     }
-    // for (size_t j = 1; j < 10;j++)
-    //     for (size_t i = 0; i < 438; i++)
-    //         formatted[i + j * 438] = 0xFF'00'00'FF;
-    return formatted;
+    std::cout <<alignment<<'\n';
+    return pixels;
 }

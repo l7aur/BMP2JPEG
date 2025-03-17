@@ -20,17 +20,7 @@ int BMP::process()
 {
     if (processFileHeader() < 0 || processDIBHeader() < 0 || /*processEBMask() < 0 ||*/ processPixelData())
         return -1;
-    setByteWidth();
     return 0;
-}
-
-void BMP::setByteWidth()
-{
-    const unsigned int bitWidth = static_cast<unsigned int>(dibHeader->getWidth()) << 3;
-    const unsigned int r = bitWidth % BIT_ALIGNMENT;
-    if (r == 0)
-        return;
-    byteWidth += (BIT_ALIGNMENT - r);
 }
 
 int BMP::processFileHeader()

@@ -28,9 +28,5 @@ int main()
         return -1;
     }
     bmpRenderer.runGameLoop();
-
-    // SDL_Texture* imgTex = bmpImg.createTexture();
-    // bmpImg.render(imgTex);
-
     return 0;
 }

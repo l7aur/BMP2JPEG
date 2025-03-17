@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Constants.h"
+
 ImageRenderer::~ImageRenderer()
 {
     SDL_DestroyRenderer(renderer);
@@ -52,24 +54,22 @@ int ImageRenderer::initRenderer()
 
 int ImageRenderer::initTexture(const int imageWidth, const int imageHeight, const uint32_t *pixels)
 {
-    if(pixels == nullptr) {
+    if (pixels == nullptr) {
         std::cerr << "Unable to render anything, pixel pointer points to nothing!\n";
         return -1;
     }
     textureWidth = imageWidth;
     textureHeight = imageHeight;
+
+    std::cout << textureWidth << ' ' << textureHeight << '\n';
+
     texture = SDL_CreateTexture(
         renderer,
         SDL_PIXELFORMAT_RGBA8888,
-        SDL_TEXTUREACCESS_STREAMING,
-        imageWidth,
-        imageHeight);
-    // for (int i = 0; i < imageWidth * imageHeight; i++) {
-    //     if (i %imageWidth==0)
-    //         printf("\n");
-    //     printf("%08x ", pixels[i]);
-    // }
-    return SDL_UpdateTexture(texture, nullptr, pixels, imageWidth * 4);//imageWidth * static_cast<int>(sizeof(uint32_t)));
+        SDL_TEXTUREACCESS_STATIC,
+        textureWidth,
+        textureHeight);
+    return SDL_UpdateTexture(texture, nullptr, pixels,Util::computeAlignment(imageWidth) * static_cast<int>(sizeof(uint32_t)));
 }
 
 int ImageRenderer::initWindow()

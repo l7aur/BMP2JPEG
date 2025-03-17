@@ -29,33 +29,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="gitignore update">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="idk">
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base/Constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Constants.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base/Image.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Image.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base/Image.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Image.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/ImageRenderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base/ImageRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/ImageRenderer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Constants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/ImageRenderer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/JPEG/JPEG.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/JPEG/JPEG.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-c0fd395135ed9f24a2d1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-03-10T19-44-38-0465.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-BMP2JPEG-Debug-3465661fb209091fba03.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,18 +66,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "l7aur"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;l7aur&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/l7aur/BMP2JPEG.git",
-    "accountId": "4193c757-6f67-4b02-a650-bcfadd1f8e57"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/l7aur/BMP2JPEG.git&quot;,
+    &quot;accountId&quot;: &quot;4193c757-6f67-4b02-a650-bcfadd1f8e57&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -134,6 +123,7 @@
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.west.config.association.type.startup.service": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -151,12 +141,12 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="BMP2JPEG" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BMP2JPEG" TARGET_NAME="BMP2JPEG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BMP2JPEG" RUN_TARGET_NAME="BMP2JPEG">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BMP2JPEG" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BMP2JPEG" TARGET_NAME="BMP2JPEG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BMP2JPEG" RUN_TARGET_NAME="BMP2JPEG">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -170,7 +160,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741633140719</updated>
-      <workItem from="1741633143176" duration="8828000" />
+      <workItem from="1741633143176" duration="9242000" />
+      <workItem from="1742220271714" duration="6550000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -188,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741638572710</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="idk">
+      <option name="closed" value="true" />
+      <created>1741642379301</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741642379301</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +212,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test2" />
     <MESSAGE value="gitignore update" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore update" />
+    <MESSAGE value="idk" />
+    <option name="LAST_COMMIT_MESSAGE" value="idk" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
