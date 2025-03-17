@@ -29,23 +29,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="idk">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added Util namespace&#10;refactored code&#10;texture updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Constants.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/ImageRenderer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" beforeDir="false" afterPath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +160,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741633140719</updated>
       <workItem from="1741633143176" duration="9242000" />
-      <workItem from="1742220271714" duration="6550000" />
+      <workItem from="1742220271714" duration="11629000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -187,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741642379301</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added Util namespace&#10;refactored code&#10;texture updates">
+      <option name="closed" value="true" />
+      <created>1742226864468</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742226864468</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +220,8 @@
     <MESSAGE value="test2" />
     <MESSAGE value="gitignore update" />
     <MESSAGE value="idk" />
-    <option name="LAST_COMMIT_MESSAGE" value="idk" />
+    <MESSAGE value="added Util namespace&#10;refactored code&#10;texture updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Util namespace&#10;refactored code&#10;texture updates" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

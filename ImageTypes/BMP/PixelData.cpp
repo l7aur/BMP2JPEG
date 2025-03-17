@@ -1,5 +1,9 @@
 #include "PixelData.h"
 
+#include <unistd.h>
+
+#include "../../Core/Constants.h"
+
 PixelData::PixelData(const size_t s)
     : dataSize(s)
 {
@@ -106,28 +110,38 @@ const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imag
     return nullptr;
 }
 
-const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int alignment) const {
+const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int alignment) {
     const int NUMBER_OF_PIXELS = alignment * imageHeight;
     auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
     unsigned int columnCounter = 0;
-    bool addPadding = false;
-    std::cout << "img " <<imageWidth << '\n';
-    for (int i = NUMBER_OF_PIXELS - 1; i >= 0; --i, ++columnCounter) {
-        if (!addPadding) {
-            // const Pixel p = colorTab->at(data[]);
-            pixels[i] = 0xff'ff'ff'ff;//(p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
-            addPadding = columnCounter == (imageWidth - 1);
+    bool addPadding = true;
+
+    for (int x = imageHeight - 1; x >= 0; --x) {
+        int y = alignment - 1;
+        while (y >= imageWidth) {
+            pixels[x * alignment + y] = 0xff'ff'00'ff;
+            y--;
         }
-        else {
-            pixels[i] = 0x00'00'00'00;
-            if (columnCounter == alignment - 1) {
-                columnCounter = 0;
-                addPadding = false;
-            }
+        while (y >= 0) {
+            pixels[x * alignment + y] = 0x00'ff'00'ff;
+            y--;
         }
-        // if (pixels[i] == 0)
-            // std::cerr << NUMBER_OF_PIXELS - i  - 1 << "Pixel data is empty!\n";
     }
-    std::cout <<alignment<<'\n';
+    // for (int i = NUMBER_OF_PIXELS - 1; i >= 0; --i, ++columnCounter) {
+    //     if (!addPadding) {
+    //         // const Pixel p = colorTab->at(data[]);
+    //         pixels[i] = 0xff'ff'ff'ff; // (p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
+    //         if (columnCounter == (alignment - 1)) {
+    //             columnCounter = 0;
+    //             addPadding = true;
+    //         }
+    //     }
+    //     else {
+    //         pixels[i] = 0xff'00'00'00;
+    //         if (columnCounter == (alignment - imageWidth)) {
+    //             addPadding = false;
+    //         }
+    //     }
+    // }
     return pixels;
 }

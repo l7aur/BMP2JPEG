@@ -4,7 +4,6 @@
 #include <cstddef>
 
 #include "ColorTable.h"
-#include "../../Core/Constants.h"
 
 enum PIXEL_DATA_ENCODING
 {
@@ -36,5 +35,5 @@ public:
 private:
     int setEncoding(uint16_t bitCount, uint32_t compression);
     int initColorTable(int fd, uint16_t bitCount);
-    [[nodiscard]] const uint32_t* format_C8(int imageWidth, int imageHeight, int alignment) const;
+    [[nodiscard]] static const uint32_t* format_C8(int imageWidth, int imageHeight, int alignment) ;
 };

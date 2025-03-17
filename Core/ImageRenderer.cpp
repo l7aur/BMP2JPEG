@@ -1,7 +1,6 @@
-#include "ImageRenderer.h"
-
 #include <iostream>
 
+#include "ImageRenderer.h"
 #include "Constants.h"
 
 ImageRenderer::~ImageRenderer()
@@ -60,16 +59,15 @@ int ImageRenderer::initTexture(const int imageWidth, const int imageHeight, cons
     }
     textureWidth = imageWidth;
     textureHeight = imageHeight;
-
-    std::cout << textureWidth << ' ' << textureHeight << '\n';
-
+    const int alignment = Util::computeAlignment(imageWidth);
+    std::cerr << alignment << '\n';
     texture = SDL_CreateTexture(
         renderer,
         SDL_PIXELFORMAT_RGBA8888,
         SDL_TEXTUREACCESS_STATIC,
         textureWidth,
         textureHeight);
-    return SDL_UpdateTexture(texture, nullptr, pixels,Util::computeAlignment(imageWidth) * static_cast<int>(sizeof(uint32_t)));
+    return SDL_UpdateTexture(texture, nullptr, pixels, alignment * static_cast<int>(sizeof(uint32_t)));
 }
 
 int ImageRenderer::initWindow()

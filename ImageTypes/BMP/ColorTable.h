@@ -2,8 +2,6 @@
 
 #include <cstdint>
 #include <cstddef>
-#include <fcntl.h>
-#include <unistd.h>
 #include <iostream>
 
 struct Pixel
@@ -13,7 +11,7 @@ struct Pixel
     {
         uint8_t a, u;
     };
-    explicit Pixel(uint8_t x = 0x00, uint8_t y = 0x00, uint8_t z = 0x00, uint8_t t = 0xFF)
+    explicit Pixel(const uint8_t x = 0x00, const uint8_t y = 0x00, const uint8_t z = 0x00, const uint8_t t = 0xFF)
         : r(x), g(y), b(z), a(t) {}
     friend std::ostream& operator<<(std::ostream& out, const Pixel& p) {
         out << "R: " << static_cast<int>(p.r)
@@ -32,14 +30,14 @@ class ColorTable
 public:
     uint8_t *data{nullptr};
     size_t tableSize{0};
-    ColorTable(size_t size) : tableSize(size)
+    explicit ColorTable(const size_t size) : tableSize(size)
     {
         data = new uint8_t[size];
     }
 
-    int initFrom(const int fd);
+    [[nodiscard]] int initFrom(int fd) const;
 
-    Pixel at(size_t i) const;
+    [[nodiscard]] Pixel at(size_t i) const;
 
-    void print();
+    void print() const;
 };
