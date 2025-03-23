@@ -35,5 +35,5 @@ public:
 private:
     int setEncoding(uint16_t bitCount, uint32_t compression);
     int initColorTable(int fd, uint16_t bitCount);
-    [[nodiscard]] static const uint32_t* format_C8(int imageWidth, int imageHeight, int alignment) ;
+    [[nodiscard]] const uint32_t* format_C8(int imageWidth, int imageHeight, int alignment) const ;
 };

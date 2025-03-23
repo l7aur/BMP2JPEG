@@ -110,38 +110,21 @@ const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imag
     return nullptr;
 }
 
-const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int alignment) {
+const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int alignment) const {
     const int NUMBER_OF_PIXELS = alignment * imageHeight;
     auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
-    unsigned int columnCounter = 0;
-    bool addPadding = true;
 
     for (int x = imageHeight - 1; x >= 0; --x) {
         int y = alignment - 1;
         while (y >= imageWidth) {
-            pixels[x * alignment + y] = 0xff'ff'00'ff;
+            pixels[x * alignment + y] = 0x00'00'00'00;
             y--;
         }
         while (y >= 0) {
-            pixels[x * alignment + y] = 0x00'ff'00'ff;
+            const Pixel p = colorTab->at(data[x * alignment + y]);
+            pixels[x * alignment + y] = p.r << 24 | p.g << 16 | p.b << 8;// | p.a;
             y--;
         }
     }
-    // for (int i = NUMBER_OF_PIXELS - 1; i >= 0; --i, ++columnCounter) {
-    //     if (!addPadding) {
-    //         // const Pixel p = colorTab->at(data[]);
-    //         pixels[i] = 0xff'ff'ff'ff; // (p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
-    //         if (columnCounter == (alignment - 1)) {
-    //             columnCounter = 0;
-    //             addPadding = true;
-    //         }
-    //     }
-    //     else {
-    //         pixels[i] = 0xff'00'00'00;
-    //         if (columnCounter == (alignment - imageWidth)) {
-    //             addPadding = false;
-    //         }
-    //     }
-    // }
     return pixels;
 }
