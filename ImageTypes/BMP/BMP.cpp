@@ -22,6 +22,12 @@ int BMP::process()
     return 0;
 }
 
+const uint32_t * BMP::getPixelData() const {
+    return pixelData->getAndFormatData(
+        static_cast<int>(dibHeader->getWidth()),
+        static_cast<int>(dibHeader->getHeight()));
+}
+
 int BMP::processFileHeader()
 {
     fileHeader = new FileHeader();
@@ -48,7 +54,7 @@ int BMP::processDIBHeader()
 int BMP::processPixelData()
 {
     pixelData = new PixelData(MAXIMUM_FILE_SIZE_IN_BYTES);
-    if (pixelData->initFrom(fileDescriptor, dibHeader->getBitCount(), dibHeader->getCompression()) < 0)
+    if (pixelData->initFrom(fileDescriptor, fileHeader->pixelDataStartingAddress, dibHeader->getBitCount(), dibHeader->getCompression()) < 0)
     {
         std::cerr << "Pixel data initialization failed!\n";
         return -1;

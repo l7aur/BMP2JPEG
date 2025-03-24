@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <cstddef>
 
 #include "ColorTable.h"
 
@@ -20,14 +19,14 @@ class PixelData
 {
 public:
     uint8_t *data{nullptr};
-    ColorTable *colorTab{nullptr};
+    ColorTable *colorTable{nullptr};
     size_t dataSize{0};
     PIXEL_DATA_ENCODING encoding{BW1};
     float indexStep{0.0f};
 
     explicit PixelData(size_t s);
     ~PixelData();
-    int initFrom(int fd, uint16_t bitCount, uint32_t compression);
+    int initFrom(int fd, int unsigned offset, uint16_t bitCount, uint32_t compression);
     void print() const;
     [[nodiscard]] size_t getSize() const { return dataSize; }
     [[nodiscard]] const uint32_t *getAndFormatData(int imageWidth, int imageHeight) const;
@@ -35,5 +34,5 @@ public:
 private:
     int setEncoding(uint16_t bitCount, uint32_t compression);
     int initColorTable(int fd, uint16_t bitCount);
-    [[nodiscard]] const uint32_t* format_C8(int imageWidth, int imageHeight, int alignment) const ;
+    [[nodiscard]] const uint32_t* format_C8(int imageWidth, int imageHeight) const ;
 };

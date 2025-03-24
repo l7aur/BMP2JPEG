@@ -20,7 +20,7 @@ void ImageRenderer::runGameLoop() const
         while (SDL_PollEvent(&event))
             running = (event.type != SDL_QUIT);
         SDL_RenderClear(renderer);
-        SDL_RenderCopy(renderer, texture, &displayRectangle, &displayRectangle);
+        SDL_RenderCopy(renderer, texture, nullptr, &displayRectangle);
         SDL_RenderPresent(renderer);
     }
 }
@@ -55,19 +55,30 @@ int ImageRenderer::initTexture(const int imageWidth, const int imageHeight, cons
 {
     if (pixels == nullptr) {
         std::cerr << "Unable to render anything, pixel pointer points to nothing!\n";
+        delete[] pixels;
         return -1;
     }
     textureWidth = imageWidth;
     textureHeight = imageHeight;
-    const int alignment = Util::computeAlignment(imageWidth);
-    std::cerr << alignment << '\n';
     texture = SDL_CreateTexture(
         renderer,
         SDL_PIXELFORMAT_RGBA8888,
         SDL_TEXTUREACCESS_STATIC,
         textureWidth,
         textureHeight);
-    return SDL_UpdateTexture(texture, nullptr, pixels, alignment * static_cast<int>(sizeof(uint32_t)));
+    if (!texture) {
+        std::cerr << "Unable to create texture!\n";
+        std::cerr << SDL_GetError() << '\n';
+        delete[] pixels;
+        return -1;
+    }
+    if (SDL_UpdateTexture(texture, nullptr, pixels, imageWidth * static_cast<int>(sizeof(uint32_t))) < 0) {
+        std::cerr << "Unable to update texture!\n";
+        delete[] pixels;
+        return -1;
+    }
+    delete[] pixels;
+    return 0;
 }
 
 int ImageRenderer::initWindow()

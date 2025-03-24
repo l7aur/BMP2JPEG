@@ -9,13 +9,15 @@ int ColorTable::initFrom(const int fd) const
         std::cerr << "Reading the color table failed!\n";
         return -1;
     }
+    std::cout << "Table size: " << tableSize << std::endl;
     return 0;
 }
 
-Pixel ColorTable::at(const size_t i) const {
-    if (i > tableSize)
+Pixel ColorTable::at(const uint8_t i) const {
+    const int index = 4 * i;
+    if (index > tableSize)
         return Pixel{0xFF, 0xFF, 0xFF, 0xFF};
-    return Pixel{data[i], data[i + 1], data[i + 2], (data[i + 3] != 0x00) ? data[i + 3] : static_cast<uint8_t>(0xFF)};
+    return Pixel{data[index + 2], data[index + 1], data[index], data[index + 3]};
 }
 
 void ColorTable::print() const

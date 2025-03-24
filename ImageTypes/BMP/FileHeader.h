@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <cstddef>
 
 /**
  * Object storing a BMP file header.

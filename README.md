@@ -55,4 +55,5 @@ The BMP file format is a raster graphics image file format used to store bitmap 
 4. [SDL Wiki - for debugging](https://wiki.libsdl.org/SDL2/SDL_PixelFormatEnum)
 5. [JPEG Official Documentation](https://jpeg.org/jpeg/)
 6. [JPEG Wiki](https://en.wikipedia.org/wiki/JPEG)
-7. [C*ompressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](https://books.ms/main/2C135A877CA819E55510F912CB6F9C98), Addison Wesley, 1999
+7. [*Compressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](https://books.ms/main/2C135A877CA819E55510F912CB6F9C98), Addison Wesley, 1999
+8. [Branch Education YouTube video](https://www.youtube.com/watch?v=Kv1Hiv3ox8I&list=WL&index=16&ab_channel=BranchEducation)

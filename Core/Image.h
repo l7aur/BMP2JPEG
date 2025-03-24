@@ -1,11 +1,9 @@
 #pragma once
 
-#include <unistd.h>
-
 class Image
 {
 public:
-    virtual ~Image() { close(fileDescriptor); };
+    virtual ~Image();
     virtual void print() const = 0;
     virtual int process() = 0;
     [[nodiscard]] int getFileDescriptor() const { return fileDescriptor; };

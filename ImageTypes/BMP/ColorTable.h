@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <cstddef>
 #include <iostream>
 
 struct Pixel
@@ -37,7 +36,7 @@ public:
 
     [[nodiscard]] int initFrom(int fd) const;
 
-    [[nodiscard]] Pixel at(size_t i) const;
+    [[nodiscard]] Pixel at(uint8_t i) const;
 
     void print() const;
 };

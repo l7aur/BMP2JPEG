@@ -1,7 +1,11 @@
 #include "Image.h"
 
 #include <fcntl.h>
-#include <iostream>
+#include <unistd.h>
+
+Image::~Image() {
+    close(fileDescriptor);
+}
 
 Image::Image(const char *filePath)
     : path(filePath)

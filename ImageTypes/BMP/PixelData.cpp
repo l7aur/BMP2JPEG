@@ -2,8 +2,6 @@
 
 #include <unistd.h>
 
-#include "../../Core/Constants.h"
-
 PixelData::PixelData(const size_t s)
     : dataSize(s)
 {
@@ -12,11 +10,11 @@ PixelData::PixelData(const size_t s)
 
 PixelData::~PixelData()
 {
-    delete colorTab;
+    delete colorTable;
     delete[] data;
 }
 
-int PixelData::initFrom(const int fd, const uint16_t bitCount, const uint32_t compression)
+int PixelData::initFrom(const int fd, const unsigned int offset, const uint16_t bitCount, const uint32_t compression)
 {
     if (initColorTable(fd, bitCount) < 0)
     {
@@ -26,6 +24,10 @@ int PixelData::initFrom(const int fd, const uint16_t bitCount, const uint32_t co
     if (setEncoding(bitCount, compression) < 0)
     {
         std::cerr << "Unhandled pixel data encoding! Aborting!\n";
+        return -1;
+    }
+    if (lseek(fd, offset, SEEK_SET) < 0) {
+        std::cerr << "Failed to reach pixel data starting point!\n";
         return -1;
     }
     dataSize = read(fd, data, dataSize);
@@ -84,8 +86,8 @@ int PixelData::initColorTable(const int fd, const uint16_t bitCount)
         std::cout << "INFO: There is no color table for this format!\n";
         return 0;
     }
-    colorTab = new ColorTable{static_cast<size_t>(1 << (bitCount + 2))};
-    return colorTab->initFrom(fd);
+    colorTable = new ColorTable{static_cast<size_t>(1 << (bitCount + 2))};
+    return colorTable->initFrom(fd);
 }
 
 void PixelData::print() const
@@ -94,7 +96,7 @@ void PixelData::print() const
     std::cout << "Size of pixeldata: " << dataSize << '\n';
     std::cout << "Type of pixeldata: " << encoding << '\n';
     std::cout << "=============END-PIXEL-DATA==============\n";
-    colorTab->print();
+    // colorTab->print();
 }
 
 const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imageHeight) const
@@ -102,7 +104,7 @@ const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imag
     switch (encoding)
     {
     case C8:
-        return format_C8(imageWidth, imageHeight, Util::computeAlignment(imageWidth));
+        return format_C8(imageWidth, imageHeight);
     default:
         break;
     }
@@ -110,21 +112,17 @@ const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imag
     return nullptr;
 }
 
-const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight, const int alignment) const {
-    const int NUMBER_OF_PIXELS = alignment * imageHeight;
+const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight) const {
+    const int rowSize = (imageWidth + 3) & ~3;
+    const int NUMBER_OF_PIXELS = imageHeight * imageWidth;
     auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
 
-    for (int x = imageHeight - 1; x >= 0; --x) {
-        int y = alignment - 1;
-        while (y >= imageWidth) {
-            pixels[x * alignment + y] = 0x00'00'00'00;
-            y--;
-        }
-        while (y >= 0) {
-            const Pixel p = colorTab->at(data[x * alignment + y]);
-            pixels[x * alignment + y] = p.r << 24 | p.g << 16 | p.b << 8;// | p.a;
-            y--;
+    for (int y = 0; y < imageHeight; ++y) {
+        for (int x = 0; x < imageWidth; ++x) {
+            const Pixel p = colorTable->at(data[(imageHeight - 1 - y) * rowSize + x]);
+            pixels[y * imageWidth + x] = (p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
         }
     }
     return pixels;
 }
+
