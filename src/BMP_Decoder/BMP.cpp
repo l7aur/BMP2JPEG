@@ -1,8 +1,18 @@
 #include "BMP.h"
 
+#include <fcntl.h>
+#include <unistd.h>
+
+#include "FileHeader.h"
+#include "DIBHeader.h"
+#include "PixelData.h"
+
+static constexpr unsigned int MAXIMUM_FILE_SIZE_IN_BYTES {500'000};
+
 BMP::BMP(const char *filePath)
-    : Image(filePath)
+    : path{filePath}
 {
+    fileDescriptor = open(filePath, O_RDONLY);
 }
 
 void BMP::print() const
@@ -24,8 +34,24 @@ int BMP::process()
 
 const uint32_t * BMP::getPixelData() const {
     return pixelData->getAndFormatData(
-        static_cast<int>(dibHeader->getWidth()),
-        static_cast<int>(dibHeader->getHeight()));
+        dibHeader->getWidth(),
+        dibHeader->getHeight());
+}
+
+int BMP::getWidth() const {
+    return dibHeader->getWidth();
+}
+
+int BMP::getHeight() const {
+    return dibHeader->getHeight();
+}
+
+int BMP::getFileDescriptor() const {
+    return fileDescriptor;
+}
+
+const char * BMP::getPath() const {
+    return path;
 }
 
 int BMP::processFileHeader()
@@ -46,11 +72,6 @@ int BMP::processDIBHeader()
     return dibHeader->initFrom(fileDescriptor, dibSize);
 }
 
-// int BMP::processEBMask()
-// {
-//     return 0;
-// }
-
 int BMP::processPixelData()
 {
     pixelData = new PixelData(MAXIMUM_FILE_SIZE_IN_BYTES);
@@ -67,7 +88,5 @@ void BMP::cleanup() const {
         free(fileHeader);
     delete dibHeader;
     delete pixelData;
-    // if (extraBitMask)
-    // free(extraBitMask);
 
 }

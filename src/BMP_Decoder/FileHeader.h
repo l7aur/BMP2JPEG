@@ -7,11 +7,11 @@
  */
 struct FileHeader
 {
-    static constexpr size_t HF_BSIZE{2};
-    static constexpr size_t FS_BSIZE{4};
-    static constexpr size_t RF1_BSIZE{2};
-    static constexpr size_t RF2_BSIZE{2};
-    static constexpr size_t PDSA_BSIZE{4};
+    static constexpr unsigned int HF_BSIZE{2};
+    static constexpr unsigned int FS_BSIZE{4};
+    static constexpr unsigned int RF1_BSIZE{2};
+    static constexpr unsigned int RF2_BSIZE{2};
+    static constexpr unsigned int PDSA_BSIZE{4};
 
     uint8_t headerField[HF_BSIZE]{0x00, 0x00};
     uint32_t fileSize{0x0000'0000};

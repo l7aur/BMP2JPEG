@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "ImageRenderer.h"
-#include "Constants.h"
 
 ImageRenderer::~ImageRenderer()
 {

@@ -65,12 +65,12 @@ int PixelData::setEncoding(const uint16_t bitCount, const uint32_t compression)
             return -1;
         }
     }
-    else if (compression == 2 && bitCount == 4)
+    if (compression == 2 && bitCount == 4)
     {
         encoding = C4COMPRESSED;
         return 0;
     }
-    else if (compression == 1 && bitCount == 8)
+    if (compression == 1 && bitCount == 8)
     {
         encoding = C8COMPRESSED;
         return 0;

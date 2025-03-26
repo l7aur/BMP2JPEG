@@ -95,21 +95,21 @@ The steps of JPEG encoding:
 
 _Markers_ are used to break up a JPEG stream into its component structures. They are 2 bytes in length with the first byte always being 0xFF, the second byte specifies the type of the marker. Any number of bytes with the value FF16 may be used as a fill character before the start of any marker. A byte in a JPEG stream with a value of FF16 that is followed by another FF16 byte is always ignored. There are 2 kinds of markers. The _stand-alone_ contain no data other than the 2 bytes. _Non-stand-alone_ markers are followed by a 2-byte long value that gives the number of bytes of data the marker contains (including the 2 length bytes, but not the 2 marker bytes).
 
-![Markers](doc/markers.png)
+![Markers](README_resources/markers.png)
 
 ### JFIF files
 
 For all practical purposes a JPEG file means a JPEG file in JFIF format.
 
-![JFIF structure](doc/jfif_structure.png)
+![JFIF structure](README_resources/jfif_structure.png)
 
-![img.png](doc/img.png)
+![img.png](README_resources/img.png)
 
-![img_1.png](doc/img_1.png)
+![img_1.png](README_resources/img_1.png)
 
-![img_2.png](doc/img_2.png)
+![img_2.png](README_resources/img_2.png)
 
-![img_3.png](doc/img_3.png)
+![img_3.png](README_resources/img_3.png)
 
 ## Bibliography
 
@@ -119,5 +119,5 @@ For all practical purposes a JPEG file means a JPEG file in JFIF format.
 4. [SDL Wiki - for debugging](https://wiki.libsdl.org/SDL2/SDL_PixelFormatEnum)
 5. [JPEG Official Documentation](https://jpeg.org/jpeg/)
 6. [JPEG Wiki](https://en.wikipedia.org/wiki/JPEG)
-7. [*Compressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](./doc/book.pdf), Addison Wesley, 1999
+7. [*Compressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](README_resources/book.pdf), Addison Wesley, 1999
 8. [Branch Education YouTube video](https://www.youtube.com/watch?v=Kv1Hiv3ox8I&list=WL&index=16&ab_channel=BranchEducation)

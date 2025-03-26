@@ -5,26 +5,23 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(SDL2 REQUIRED)
 
-add_executable(BMP2JPEG main.cpp
-        Core/Image.cpp
-        Core/Image.h
-        Core/ImageRenderer.cpp
-        Core/ImageRenderer.h
-        ImageTypes/BMP/BMP.cpp
-        ImageTypes/BMP/BMP.h
-        Core/Constants.h
-        ImageTypes/BMP/ColorTable.cpp
-        ImageTypes/BMP/ColorTable.h
-        ImageTypes/BMP/PixelData.cpp
-        ImageTypes/BMP/PixelData.h
-        ImageTypes/BMP/FileHeader.cpp
-        ImageTypes/BMP/FileHeader.h
-        ImageTypes/BMP/DIBHeader.cpp
-        ImageTypes/BMP/DIBHeader.h
-        ImageTypes/BMP/ExtraBitMask.cpp
-        ImageTypes/BMP/ExtraBitMask.h
-        ImageTypes/JPEG/JPEG.cpp
-        ImageTypes/JPEG/JPEG.h)
+add_executable(BMP2JPEG src/main.cpp
+        src/Core/ImageRenderer.cpp
+        src/Core/ImageRenderer.h
+        src/BMP_Decoder/BMP.cpp
+        src/BMP_Decoder/BMP.h
+        src/BMP_Decoder/ColorTable.cpp
+        src/BMP_Decoder/ColorTable.h
+        src/BMP_Decoder/PixelData.cpp
+        src/BMP_Decoder/PixelData.h
+        src/BMP_Decoder/FileHeader.cpp
+        src/BMP_Decoder/FileHeader.h
+        src/BMP_Decoder/DIBHeader.cpp
+        src/BMP_Decoder/DIBHeader.h
+        src/BMP_Decoder/ExtraBitMask.cpp
+        src/BMP_Decoder/ExtraBitMask.h
+        src/JFIF_Encoder/JPEG.cpp
+        src/JFIF_Encoder/JPEG.h)
 
 target_include_directories(BMP2JPEG PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(BMP2JPEG PRIVATE ${SDL2_LIBRARIES})

@@ -108,16 +108,17 @@ class DIBHeader
 public:
     DIB_TYPES type{BITMAPCOREHEADER};
     void *data{nullptr};
+
     explicit DIBHeader(uint32_t in_type);
     ~DIBHeader();
     [[nodiscard]] int initFrom(int fd, uint32_t dibSize) const;
-    void print() const;
     [[nodiscard]] uint32_t getSizeOfColorTable() const;
     [[nodiscard]] uint16_t getBitCount() const;
     [[nodiscard]] uint32_t getCompression() const;
     [[nodiscard]] int32_t getWidth() const;
     [[nodiscard]] int32_t getHeight() const;
-    
+    void print() const;
+
 private:
     [[nodiscard]] int init_BITMAPINFOHEADER(int fd) const;
     void printHelper_BITMAPINFOHEADER() const;

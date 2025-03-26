@@ -58,18 +58,6 @@ int DIBHeader::initFrom(const int fd, const uint32_t dibSize) const {
     }
 }
 
-void DIBHeader::print() const
-{
-    switch (type) {
-        case BITMAPINFOHEADER:
-            printHelper_BITMAPINFOHEADER();
-        break;
-        default:
-            std::cerr << "DIB header structure is not handled!\n";
-        break;
-    }
-}
-
 uint32_t DIBHeader::getSizeOfColorTable() const
 {
     if (data == nullptr)
@@ -194,21 +182,33 @@ int DIBHeader::init_BITMAPINFOHEADER(const int fd) const
     return 0;
 }
 
+void DIBHeader::print() const
+{
+    switch (type) {
+        case BITMAPINFOHEADER:
+            printHelper_BITMAPINFOHEADER();
+        break;
+        default:
+            std::cerr << "DIB header structure is not handled!\n";
+        break;
+    }
+}
+
 void DIBHeader::printHelper_BITMAPINFOHEADER() const
 {
     const auto *ptr = static_cast<BITMAPINFOHEADER_T *>(data);
     printf("===============DIB--HEADER===============\n");
-    printf("Size:\t\t\t\t%08X\n", ptr->size);
-    printf("Width:\t\t\t\t%08X\n", ptr->width);
-    printf("Height:\t\t\t\t%08X\n", ptr->height);
-    printf("Planes:\t\t\t\t%04X\n", ptr->planes);
-    printf("Bit Count:\t\t\t%04X\n", ptr->bitCount);
-    printf("Compression:\t\t\t%08X\n", ptr->compression);
-    printf("Image size:\t\t\t%08X\n", ptr->imageSize);
-    printf("Pixels per meter OX:\t\t%08X\n", ptr->pixelsPerMeterOX);
-    printf("Pixels per meter OY:\t\t%08X\n", ptr->pixelsPerMeterOY);
-    printf("Used colors:\t\t\t%08X\n", ptr->usedColors);
-    printf("Important colors:\t\t%08X\n", ptr->importantColors);
+    printf("Size: %08X\n", ptr->size);
+    printf("Width: %08X\n", ptr->width);
+    printf("Height: %08X\n", ptr->height);
+    printf("Planes: %04X\n", ptr->planes);
+    printf("Bit Count: %04X\n", ptr->bitCount);
+    printf("Compression: %08X\n", ptr->compression);
+    printf("Image size: %08X\n", ptr->imageSize);
+    printf("Pixels per meter OX: %08X\n", ptr->pixelsPerMeterOX);
+    printf("Pixels per meter OY: %08X\n", ptr->pixelsPerMeterOY);
+    printf("Used colors: %08X\n", ptr->usedColors);
+    printf("Important colors: %08X\n", ptr->importantColors);
     printf("============END-OF-DIB-HEADER============\n");
 }
 

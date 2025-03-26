@@ -1,9 +1,11 @@
-#include "ImageTypes/BMP/BMP.h"
+#include <iostream>
+
+#include "BMP_Decoder/BMP.h"
 #include "Core/ImageRenderer.h"
 
 int main()
 {
-    constexpr char BMP_FILE_PATH[] = "Resources/cell.bmp";
+    constexpr char BMP_FILE_PATH[] = "Resources/saturn.bmp";
     BMP bmpImg(BMP_FILE_PATH);
     if (bmpImg.getFileDescriptor() < 0) {
         std::cerr << "File \'" << bmpImg.getPath() << "\' could not be opened!\n";

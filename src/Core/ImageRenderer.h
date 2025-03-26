@@ -20,7 +20,6 @@ private:
     SDL_Renderer *renderer{nullptr};
     SDL_Texture *texture{nullptr};
 
-    /* constructor helper */
     int initRenderer();
     int initWindow();
 
