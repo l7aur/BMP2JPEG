@@ -36,7 +36,7 @@ JFIF::JFIF(const char *folderPath, const char *fileName) {
     fileDescriptor = creat(filePathStr.c_str(),  O_CREAT | S_IRUSR | S_IWUSR);
 }
 
-int JFIF::encode(const uint32_t *pixels, const int n) const {
+int JFIF::encode(const uint32_t *pixels, const int width, const int height) const {
     if (fileDescriptor < 0) {
         std::cerr << ".jfif file could not be created!\n";
         return -1;
@@ -77,13 +77,13 @@ int JFIF::writeMarker(const char* markerId) const {
         const marker m = MARKERS.at(markerId);
         return static_cast<int>(write(fileDescriptor, &m, MARKER_SIZE_BYTES));
     }
-    catch (const std::out_of_range &e) {
+    catch (const std::out_of_range&) {
         std::cerr << "Could not write marker " << markerId << " in .jfif file!\n";
         return -1;
     }
 }
 
-void JFIF::cleanup() {
+void JFIF::cleanup() const {
     if (close(fileDescriptor) < 0)
         std::cerr << "Error closing the .jfif file!\n";
 }

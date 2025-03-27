@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 
     JFIF jfif{"./", "result"};
 
-    status = jfif.encode(bmpImg.getPixelData(), bmpImg.getWidth()* bmpImg.getHeight());
+    status = jfif.encode(bmpImg.getPixelData(), bmpImg.getWidth(), bmpImg.getHeight());
     if (status < 0) {
         std::cerr << "Image could not be converted to .jfif\n";
         return -1;

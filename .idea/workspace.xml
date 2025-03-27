@@ -28,28 +28,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="refactored project structure">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/ImageRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JPEG.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JPEG.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="refactored for jfif" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +164,7 @@
       <workItem from="1742841585013" duration="8085000" />
       <workItem from="1743017167396" duration="5412000" />
       <workItem from="1743022698860" duration="1869000" />
-      <workItem from="1743099985096" duration="6586000" />
+      <workItem from="1743099985096" duration="7325000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -275,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743024321197</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactored for jfif">
+      <option name="closed" value="true" />
+      <created>1743107036766</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743107036766</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +294,8 @@
     <MESSAGE value="fixed sdl texture" />
     <MESSAGE value="update doc" />
     <MESSAGE value="refactored project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored project structure" />
+    <MESSAGE value="refactored for jfif" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored for jfif" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

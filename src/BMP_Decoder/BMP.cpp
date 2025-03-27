@@ -78,7 +78,7 @@ int BMP::processPixelData() {
     return 0;
 }
 
-void BMP::cleanup() {
+void BMP::cleanup() const {
     if (close(fileDescriptor) < 0)
         std::cerr << "Error closing the .bmp file!\n";
     if (fileHeader)

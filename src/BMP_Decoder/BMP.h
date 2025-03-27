@@ -34,5 +34,5 @@ private:
     int processDIBHeader();
     int processPixelData();
 
-    void cleanup();
+    void cleanup() const;
 };
