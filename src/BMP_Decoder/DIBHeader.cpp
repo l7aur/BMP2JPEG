@@ -3,8 +3,73 @@
 #include <iostream>
 #include <unistd.h>
 
-DIBHeader::DIBHeader(const uint32_t in_type)
-{
+struct BITMAPCOREHEADER_T {
+
+};
+struct OS22XBITMAPHEADER_T {
+
+};
+struct BITMAPINFOHEADER_T {
+    uint32_t size{0};                       // size of the structure in bytes
+    int32_t width{0};                       // width in pixels
+    int32_t height{0};                      // height in pixels
+                                            // for uncompressed RGB bitmaps, if it positive the bitmap is bottom-up, with the DIB origin at the lower left corner
+                                            //                               if it is negative the bitmap is a top-down DIB with the origin at the upper right corner
+                                            // for YUV bitmaps, the bitmap is always top-down regardless of sign
+                                            // for compressed formats it has to be positive
+    uint16_t planes{0};                     // number of planes, must be 1
+    uint16_t bitCount{0};                   // number of bits per pixel, for uncompressed formats it is the average of bits per pixel
+                                            //                           for compressed formats it is the bit depth of the uncompressed image after its decompression
+    uint32_t compression{0};                //
+    uint32_t imageSize{0};                  // size of the image in bytes
+    int32_t pixelsPerMeterOX{0};            // horizontal resolution, in pixels per meter, of the target device for the bitmap
+    int32_t pixelsPerMeterOY{0};            // vertical resolution, in pixels per meter, of the target device for the bitmap
+    uint32_t usedColors{0};                 // number of color indices in the color table that are actually used by the bitmap
+    uint32_t importantColors{0};            // number of color indices that are considered important for displaying the bitmap, if it is 0 all colors are important
+};
+struct BITMAPV2INFOHEADER_T {
+};
+struct BITMAPV3INFOHEADER_T {
+};
+struct BITMAPV4HEADER_T {
+};
+struct BITMAPV5HEADER_T {
+    // test the types
+    // uint32_t size{0x0000'0000};
+    // uint64_t width{0x0000'0000'0000'0000};
+    // uint64_t height{0x0000'0000'0000'0000};
+    // uint16_t planes{0x0000};
+    // uint16_t bitCount{0x0000};
+    // uint32_t compression{0x0000'0000};
+    // uint32_t imageSize{0x0000'0000};
+    // uint64_t pixelsPerMeterOX{0x0000'0000'0000'0000};
+    // uint64_t pixelsPerMeterOY{0x0000'0000'0000'0000};
+    // uint32_t usedColors{0x0000'0000};      // number of color indices in the color table that are actually used by the bitmap
+    // uint32_t importantColors{0x0000'0000}; // number of color indices that are considered important for displaying the bitmap
+    // uint32_t redMask{0x0000'0000};
+    // uint32_t greenMask{0x0000'0000};
+    // uint32_t blueMask{0x0000'0000};
+    // uint32_t alphaMask{0x0000'0000};
+    // uint32_t csType{0x0000'0000};
+    // struct
+    // {
+    //     uint32_t x1, y1, z1;
+    //     uint32_t x2, y2, z2;
+    //     uint32_t x3, y3, z3;
+    // } endpoints{
+    //     0x0000'0000, 0x0000'0000, 0x0000'0000,
+    //     0x0000'0000, 0x0000'0000, 0x0000'0000,
+    //     0x0000'0000, 0x0000'0000, 0x0000'0000};
+    // uint32_t redGamma{0x0000'0000};
+    // uint32_t greenGamma{0x0000'0000};
+    // uint32_t blueGamma{0x0000'0000};
+    // uint32_t intent{0x0000'0000};
+    // uint32_t profileData{0x0000'0000};
+    // uint32_t profileSize{0x0000'0000};
+    // uint32_t reserved{0x0000'0000};
+};
+
+DIBHeader::DIBHeader(const uint32_t in_type) {
     switch (in_type)
     {
     case BITMAPCOREHEADER:
@@ -41,8 +106,7 @@ DIBHeader::DIBHeader(const uint32_t in_type)
     }
 }
 
-DIBHeader::~DIBHeader()
-{
+DIBHeader::~DIBHeader() {
     if (data)
         free(data);
 }
@@ -58,8 +122,7 @@ int DIBHeader::initFrom(const int fd, const uint32_t dibSize) const {
     }
 }
 
-uint32_t DIBHeader::getSizeOfColorTable() const
-{
+uint32_t DIBHeader::getSizeOfColorTable() const {
     if (data == nullptr)
         return 0;
     switch (type)
@@ -78,8 +141,7 @@ uint32_t DIBHeader::getSizeOfColorTable() const
     return 0;
 }
 
-uint16_t DIBHeader::getBitCount() const
-{
+uint16_t DIBHeader::getBitCount() const {
     switch (type)
     {
     case BITMAPINFOHEADER:
@@ -90,8 +152,7 @@ uint16_t DIBHeader::getBitCount() const
     }
 }
 
-uint32_t DIBHeader::getCompression() const
-{
+uint32_t DIBHeader::getCompression() const {
     switch (type)
     {
     case BITMAPINFOHEADER:
@@ -102,8 +163,7 @@ uint32_t DIBHeader::getCompression() const
     }
 }
 
-int32_t DIBHeader::getWidth() const
-{
+int32_t DIBHeader::getWidth() const {
     switch (type)
     {
     case BITMAPINFOHEADER:
@@ -114,8 +174,7 @@ int32_t DIBHeader::getWidth() const
     }
 }
 
-int32_t DIBHeader::getHeight() const
-{
+int32_t DIBHeader::getHeight() const {
     switch (type)
     {
     case BITMAPINFOHEADER:
@@ -126,8 +185,7 @@ int32_t DIBHeader::getHeight() const
     }
 }
 
-int DIBHeader::init_BITMAPINFOHEADER(const int fd) const
-{
+int DIBHeader::init_BITMAPINFOHEADER(const int fd) const {
     auto *ptr = static_cast<BITMAPINFOHEADER_T *>(data);
     if (read(fd, &(ptr->width), sizeof(ptr->width)) < 0)
     {
@@ -182,8 +240,7 @@ int DIBHeader::init_BITMAPINFOHEADER(const int fd) const
     return 0;
 }
 
-void DIBHeader::print() const
-{
+void DIBHeader::print() const {
     switch (type) {
         case BITMAPINFOHEADER:
             printHelper_BITMAPINFOHEADER();
@@ -194,8 +251,7 @@ void DIBHeader::print() const
     }
 }
 
-void DIBHeader::printHelper_BITMAPINFOHEADER() const
-{
+void DIBHeader::printHelper_BITMAPINFOHEADER() const {
     const auto *ptr = static_cast<BITMAPINFOHEADER_T *>(data);
     printf("===============DIB--HEADER===============\n");
     printf("Size: %08X\n", ptr->size);
@@ -212,22 +268,18 @@ void DIBHeader::printHelper_BITMAPINFOHEADER() const
     printf("============END-OF-DIB-HEADER============\n");
 }
 
-uint16_t DIBHeader::getBitCount_BITMAPINFOHEADER() const
-{
+uint16_t DIBHeader::getBitCount_BITMAPINFOHEADER() const {
     return static_cast<BITMAPINFOHEADER_T *>(data)->bitCount;
 }
 
-uint32_t DIBHeader::getCompression_BITMAPINFOHEADER() const
-{
+uint32_t DIBHeader::getCompression_BITMAPINFOHEADER() const {
     return static_cast<BITMAPINFOHEADER_T *>(data)->compression;
 }
 
-int32_t DIBHeader::getWidth_BITMAPINFOHEADER() const
-{
+int32_t DIBHeader::getWidth_BITMAPINFOHEADER() const {
     return std::max(0, static_cast<BITMAPINFOHEADER_T *>(data)->width);
 }
 
-int32_t DIBHeader::getHeight_BITMAPINFOHEADER() const
-{
+int32_t DIBHeader::getHeight_BITMAPINFOHEADER() const {
     return std::max(0, static_cast<BITMAPINFOHEADER_T *>(data)->height);
 }

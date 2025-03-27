@@ -56,12 +56,12 @@ build CMakeFiles/BMP2JPEG.dir/src/main.cpp.o: CXX_COMPILER__BMP2JPEG_unscanned_D
   OBJECT_DIR = CMakeFiles/BMP2JPEG.dir
   OBJECT_FILE_DIR = CMakeFiles/BMP2JPEG.dir/src
 
-build CMakeFiles/BMP2JPEG.dir/src/Core/ImageRenderer.cpp.o: CXX_COMPILER__BMP2JPEG_unscanned_Debug /home/l7aur/CLionProjects/BMP2JPEG/src/Core/ImageRenderer.cpp || cmake_object_order_depends_target_BMP2JPEG
-  DEP_FILE = CMakeFiles/BMP2JPEG.dir/src/Core/ImageRenderer.cpp.o.d
+build CMakeFiles/BMP2JPEG.dir/src/Util/ImageRenderer.cpp.o: CXX_COMPILER__BMP2JPEG_unscanned_Debug /home/l7aur/CLionProjects/BMP2JPEG/src/Util/ImageRenderer.cpp || cmake_object_order_depends_target_BMP2JPEG
+  DEP_FILE = CMakeFiles/BMP2JPEG.dir/src/Util/ImageRenderer.cpp.o.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -isystem /usr/include/SDL2
   OBJECT_DIR = CMakeFiles/BMP2JPEG.dir
-  OBJECT_FILE_DIR = CMakeFiles/BMP2JPEG.dir/src/Core
+  OBJECT_FILE_DIR = CMakeFiles/BMP2JPEG.dir/src/Util
 
 build CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/BMP.cpp.o: CXX_COMPILER__BMP2JPEG_unscanned_Debug /home/l7aur/CLionProjects/BMP2JPEG/src/BMP_Decoder/BMP.cpp || cmake_object_order_depends_target_BMP2JPEG
   DEP_FILE = CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/BMP.cpp.o.d
@@ -105,8 +105,8 @@ build CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/ExtraBitMask.cpp.o: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles/BMP2JPEG.dir
   OBJECT_FILE_DIR = CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder
 
-build CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JPEG.cpp.o: CXX_COMPILER__BMP2JPEG_unscanned_Debug /home/l7aur/CLionProjects/BMP2JPEG/src/JFIF_Encoder/JPEG.cpp || cmake_object_order_depends_target_BMP2JPEG
-  DEP_FILE = CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JPEG.cpp.o.d
+build CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JFIF.cpp.o: CXX_COMPILER__BMP2JPEG_unscanned_Debug /home/l7aur/CLionProjects/BMP2JPEG/src/JFIF_Encoder/JFIF.cpp || cmake_object_order_depends_target_BMP2JPEG
+  DEP_FILE = CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JFIF.cpp.o.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -isystem /usr/include/SDL2
   OBJECT_DIR = CMakeFiles/BMP2JPEG.dir
@@ -120,7 +120,7 @@ build CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JPEG.cpp.o: CXX_COMPILER__BMP2JPE
 #############################################
 # Link the executable BMP2JPEG
 
-build BMP2JPEG: CXX_EXECUTABLE_LINKER__BMP2JPEG_Debug CMakeFiles/BMP2JPEG.dir/src/main.cpp.o CMakeFiles/BMP2JPEG.dir/src/Core/ImageRenderer.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/BMP.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/ColorTable.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/PixelData.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/FileHeader.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/DIBHeader.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/ExtraBitMask.cpp.o CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JPEG.cpp.o | /usr/lib/x86_64-linux-gnu/libSDL2.so
+build BMP2JPEG: CXX_EXECUTABLE_LINKER__BMP2JPEG_Debug CMakeFiles/BMP2JPEG.dir/src/main.cpp.o CMakeFiles/BMP2JPEG.dir/src/Util/ImageRenderer.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/BMP.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/ColorTable.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/PixelData.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/FileHeader.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/DIBHeader.cpp.o CMakeFiles/BMP2JPEG.dir/src/BMP_Decoder/ExtraBitMask.cpp.o CMakeFiles/BMP2JPEG.dir/src/JFIF_Encoder/JFIF.cpp.o | /usr/lib/x86_64-linux-gnu/libSDL2.so
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libSDL2.so
   OBJECT_DIR = CMakeFiles/BMP2JPEG.dir

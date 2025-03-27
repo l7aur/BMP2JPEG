@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(SDL2 REQUIRED)
 
 add_executable(BMP2JPEG src/main.cpp
-        src/Core/ImageRenderer.cpp
-        src/Core/ImageRenderer.h
+        src/Util/ImageRenderer.cpp
+        src/Util/ImageRenderer.h
         src/BMP_Decoder/BMP.cpp
         src/BMP_Decoder/BMP.h
         src/BMP_Decoder/ColorTable.cpp
@@ -20,8 +20,8 @@ add_executable(BMP2JPEG src/main.cpp
         src/BMP_Decoder/DIBHeader.h
         src/BMP_Decoder/ExtraBitMask.cpp
         src/BMP_Decoder/ExtraBitMask.h
-        src/JFIF_Encoder/JPEG.cpp
-        src/JFIF_Encoder/JPEG.h)
+        src/JFIF_Encoder/JFIF.cpp
+        src/JFIF_Encoder/JFIF.h)
 
 target_include_directories(BMP2JPEG PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(BMP2JPEG PRIVATE ${SDL2_LIBRARIES})

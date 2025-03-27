@@ -15,8 +15,7 @@ BMP::BMP(const char *filePath)
     fileDescriptor = open(filePath, O_RDONLY);
 }
 
-void BMP::print() const
-{
+void BMP::print() const {
     if (fileHeader)
         fileHeader->print();
     if (dibHeader)
@@ -25,8 +24,7 @@ void BMP::print() const
         pixelData->print();
 }
 
-int BMP::process()
-{
+int BMP::process() {
     if (processFileHeader() < 0 || processDIBHeader() < 0 || /*processEBMask() < 0 ||*/ processPixelData())
         return -1;
     return 0;
@@ -54,14 +52,12 @@ const char * BMP::getPath() const {
     return path;
 }
 
-int BMP::processFileHeader()
-{
+int BMP::processFileHeader() {
     fileHeader = new FileHeader();
     return fileHeader->initFrom(fileDescriptor);
 }
 
-int BMP::processDIBHeader()
-{
+int BMP::processDIBHeader() {
     uint32_t dibSize{0};
     if (read(fileDescriptor, &dibSize, sizeof(dibSize)) < 0)
     {
@@ -72,8 +68,7 @@ int BMP::processDIBHeader()
     return dibHeader->initFrom(fileDescriptor, dibSize);
 }
 
-int BMP::processPixelData()
-{
+int BMP::processPixelData() {
     pixelData = new PixelData(MAXIMUM_FILE_SIZE_IN_BYTES);
     if (pixelData->initFrom(fileDescriptor, fileHeader->pixelDataStartingAddress, dibHeader->getBitCount(), dibHeader->getCompression()) < 0)
     {
@@ -83,7 +78,9 @@ int BMP::processPixelData()
     return 0;
 }
 
-void BMP::cleanup() const {
+void BMP::cleanup() {
+    if (close(fileDescriptor) < 0)
+        std::cerr << "Error closing the .bmp file!\n";
     if (fileHeader)
         free(fileHeader);
     delete dibHeader;

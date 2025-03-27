@@ -28,57 +28,27 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="update doc">
-      <change afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JPEG.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JPEG.h" afterDir="false" />
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="refactored project structure">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Constants.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Image.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Image.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/ImageRenderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/ImageRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/ImageRenderer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/BMP.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ColorTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/DIBHeader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/DIBHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ExtraBitMask.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ExtraBitMask.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/ExtraBitMask.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ExtraBitMask.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/FileHeader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/FileHeader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/FileHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/FileHeader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/BMP/PixelData.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/JPEG/JPEG.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageTypes/JPEG/JPEG.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-c7ebb349e52a688cb65d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-BMP2JPEG-Debug-60d849b4fef05752d9a1.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/BMP2JPEG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/Core/Image.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/Core/Image.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/Core/ImageRenderer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/Core/ImageRenderer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/BMP.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/ColorTable.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/DIBHeader.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/DIBHeader.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/FileHeader.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/FileHeader.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/BMP/PixelData.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/JPEG/JPEG.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/ImageTypes/JPEG/JPEG.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/BMP2JPEG.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/book.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/book.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img.png" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/img_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/img_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/img_3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/jfif_structure.png" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/jfif_structure.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/markers.png" beforeDir="false" afterPath="$PROJECT_DIR$/README_resources/markers.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/ImageRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JPEG.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JPEG.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +88,16 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/BMP.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -125,14 +105,12 @@
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/PixelData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/PixelData.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Core/ImageRenderer.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Core/ImageRenderer.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/JFIF_Encoder/JPEG.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/JFIF_Encoder/JPEG.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -179,12 +157,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="BMP2JPEG" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BMP2JPEG" TARGET_NAME="BMP2JPEG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BMP2JPEG" RUN_TARGET_NAME="BMP2JPEG">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BMP2JPEG" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BMP2JPEG" TARGET_NAME="BMP2JPEG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BMP2JPEG" RUN_TARGET_NAME="BMP2JPEG">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -206,7 +184,8 @@
       <workItem from="1742832259682" duration="2242000" />
       <workItem from="1742841585013" duration="8085000" />
       <workItem from="1743017167396" duration="5412000" />
-      <workItem from="1743022698860" duration="1524000" />
+      <workItem from="1743022698860" duration="1869000" />
+      <workItem from="1743099985096" duration="6586000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -288,7 +267,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743022374125</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="refactored project structure">
+      <option name="closed" value="true" />
+      <created>1743024321197</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1743024321197</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +306,8 @@
     <MESSAGE value="started doc" />
     <MESSAGE value="fixed sdl texture" />
     <MESSAGE value="update doc" />
-    <option name="LAST_COMMIT_MESSAGE" value="update doc" />
+    <MESSAGE value="refactored project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored project structure" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
