@@ -1,6 +1,7 @@
 #include "BMP.h"
 
 #include <fcntl.h>
+#include <iostream>
 #include <unistd.h>
 
 #include "FileHeader.h"
@@ -61,7 +62,7 @@ int BMP::processDIBHeader() {
     uint32_t dibSize{0};
     if (read(fileDescriptor, &dibSize, sizeof(dibSize)) < 0)
     {
-        std::cerr << "Error while reading the size of the DIB header!\n";
+        std::cerr << "[ERROR] Error while reading the size of the DIB header!\n";
         return -1;
     }
     dibHeader = new DIBHeader(dibSize);
@@ -72,7 +73,7 @@ int BMP::processPixelData() {
     pixelData = new PixelData(MAXIMUM_FILE_SIZE_IN_BYTES);
     if (pixelData->initFrom(fileDescriptor, fileHeader->pixelDataStartingAddress, dibHeader->getBitCount(), dibHeader->getCompression()) < 0)
     {
-        std::cerr << "Pixel data initialization failed!\n";
+        std::cerr << "[ERROR] Pixel data initialization failed!\n";
         return -1;
     }
     return 0;
@@ -80,7 +81,7 @@ int BMP::processPixelData() {
 
 void BMP::cleanup() const {
     if (close(fileDescriptor) < 0)
-        std::cerr << "Error closing the .bmp file!\n";
+        std::cerr << "[ERROR] Could not close the .bmp file!\n";
     if (fileHeader)
         free(fileHeader);
     delete dibHeader;

@@ -7,27 +7,27 @@ int FileHeader::initFrom(const int fd)
 {
     if (read(fd, headerField, HF_BSIZE) < 0)
     {
-        std::cerr << "Error while reading \'fileHeader->headerField\'!\n";
+        std::cerr << "[ERROR] Could not read \'fileHeader->headerField\'!\n";
         return -1;
     }
     if (read(fd, &fileSize, FS_BSIZE) < 0)
     {
-        std::cerr << "Error while reading \'fileHeader->fileSize\'!\n";
+        std::cerr << "[ERROR] Could not read \'fileHeader->fileSize\'!\n";
         return -1;
     }
     if (read(fd, reservedField1, RF1_BSIZE) < 0)
     {
-        std::cerr << "Error while reading \'fileHeader->reservedField1\'!\n";
+        std::cerr << "[ERROR] Could not read \'fileHeader->reservedField1\'!\n";
         return -1;
     }
     if (read(fd, reservedField2, RF2_BSIZE) < 0)
     {
-        std::cerr << "Error while reading \'fileHeader->reservedField2\'!\n";
+        std::cerr << "[ERROR] Could not read \'fileHeader->reservedField2\'!\n";
         return -1;
     }
     if (read(fd, &pixelDataStartingAddress, PDSA_BSIZE) < 0)
     {
-        std::cerr << "Error while reading \'fileHeader->reservedField2\'!\n";
+        std::cerr << "[ERROR] Could not read \'fileHeader->reservedField2\'!\n";
         return -1;
     }
     return 0;

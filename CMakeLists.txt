@@ -21,7 +21,9 @@ add_executable(BMP2JPEG src/main.cpp
         src/BMP_Decoder/ExtraBitMask.cpp
         src/BMP_Decoder/ExtraBitMask.h
         src/JFIF_Encoder/JFIF.cpp
-        src/JFIF_Encoder/JFIF.h)
+        src/JFIF_Encoder/JFIF.h
+        src/Util/FreeFunctions.h
+        src/Util/Pixel3.h)
 
 target_include_directories(BMP2JPEG PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(BMP2JPEG PRIVATE ${SDL2_LIBRARIES})

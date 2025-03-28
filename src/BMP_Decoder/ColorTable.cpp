@@ -1,21 +1,22 @@
 #include "ColorTable.h"
 
+#include <iostream>
 #include <unistd.h>
 
 int ColorTable::initFrom(const int fd) const {
     if (read(fd, data, tableSize) < 0)
     {
-        std::cerr << "Reading the color table failed!\n";
+        std::cerr << "[ERROR] Reading the color table failed!\n";
         return -1;
     }
     return 0;
 }
 
-Pixel ColorTable::at(const uint8_t i) const {
+Util::Pixel3 ColorTable::at(const uint8_t i) const {
     const int index = 4 * i;
     if (index > tableSize)
-        return Pixel{0xFF, 0xFF, 0xFF, 0xFF};
-    return Pixel{data[index + 2], data[index + 1], data[index], data[index + 3]};
+        return Util::Pixel3{0xFF, 0xFF, 0xFF, 0xFF};
+    return Util::Pixel3{data[index + 2], data[index + 1], data[index], data[index + 3]};
 }
 
 void ColorTable::print() const {

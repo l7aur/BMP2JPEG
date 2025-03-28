@@ -3,13 +3,13 @@
 #include <iostream>
 #include <unistd.h>
 
-struct BITMAPCOREHEADER_T {
+struct BITMAP_CORE_HEADER_T {
 
 };
-struct OS22XBITMAPHEADER_T {
+struct OS22X_BITMAP_HEADER_T {
 
 };
-struct BITMAPINFOHEADER_T {
+struct BITMAP_INFO_HEADER_T {
     uint32_t size{0};                       // size of the structure in bytes
     int32_t width{0};                       // width in pixels
     int32_t height{0};                      // height in pixels
@@ -27,13 +27,13 @@ struct BITMAPINFOHEADER_T {
     uint32_t usedColors{0};                 // number of color indices in the color table that are actually used by the bitmap
     uint32_t importantColors{0};            // number of color indices that are considered important for displaying the bitmap, if it is 0 all colors are important
 };
-struct BITMAPV2INFOHEADER_T {
+struct BITMAP_V2_INFO_HEADER_T {
 };
-struct BITMAPV3INFOHEADER_T {
+struct BITMAP_V3_INFO_HEADER_T {
 };
-struct BITMAPV4HEADER_T {
+struct BITMAP_V4_HEADER_T {
 };
-struct BITMAPV5HEADER_T {
+struct BITMAP_V5_HEADER_T {
     // test the types
     // uint32_t size{0x0000'0000};
     // uint64_t width{0x0000'0000'0000'0000};
@@ -72,36 +72,36 @@ struct BITMAPV5HEADER_T {
 DIBHeader::DIBHeader(const uint32_t in_type) {
     switch (in_type)
     {
-    case BITMAPCOREHEADER:
-        type = BITMAPCOREHEADER;
-        data = malloc(sizeof(BITMAPCOREHEADER_T));
+        case BITMAP_CORE_HEADER:
+        type = BITMAP_CORE_HEADER;
+        data = malloc(sizeof(BITMAP_CORE_HEADER_T));
         break;
-    case OS22XBITMAPHEADER:
-        type = OS22XBITMAPHEADER;
-        data = malloc(sizeof(OS22XBITMAPHEADER_T));
+    case OS22X_BITMAP_HEADER:
+        type = OS22X_BITMAP_HEADER;
+        data = malloc(sizeof(OS22X_BITMAP_HEADER_T));
         break;
-    case BITMAPINFOHEADER:
-        type = BITMAPINFOHEADER;
-        data = malloc(sizeof(BITMAPINFOHEADER_T));
+    case BITMAP_INFO_HEADER:
+        type = BITMAP_INFO_HEADER;
+        data = malloc(sizeof(BITMAP_INFO_HEADER_T));
         break;
-    case BITMAPV2INFOHEADER:
-        type = BITMAPV2INFOHEADER;
-        data = malloc(sizeof(BITMAPV2INFOHEADER_T));
+    case BITMAP_V2_INFO_HEADER:
+        type = BITMAP_V2_INFO_HEADER;
+        data = malloc(sizeof(BITMAP_V2_INFO_HEADER_T));
         break;
-    case BITMAPV3INFOHEADER:
-        type = BITMAPV3INFOHEADER;
-        data = malloc(sizeof(BITMAPV3INFOHEADER_T));
+        case BITMAP_V3_INFO_HEADER:
+        type = BITMAP_V3_INFO_HEADER;
+        data = malloc(sizeof(BITMAP_V3_INFO_HEADER_T));
         break;
-    case BITMAPV4HEADER:
-        type = BITMAPV4HEADER;
-        data = malloc(sizeof(BITMAPV4HEADER_T));
+    case BITMAP_V4_HEADER:
+        type = BITMAP_V4_HEADER;
+        data = malloc(sizeof(BITMAP_V4_HEADER_T));
         break;
-    case BITMAPV5HEADER:
-        type = BITMAPV5HEADER;
-        data = malloc(sizeof(BITMAPV5HEADER_T));
+    case BITMAP_V5_HEADER:
+        type = BITMAP_V5_HEADER;
+        data = malloc(sizeof(BITMAP_V5_HEADER_T));
         break;
     default:
-        std::cerr << "Unhandled DIB header structure!\n";
+        std::cerr << "[ERROR] Unhandled DIB header structure!\n";
         break;
     }
 }
@@ -113,11 +113,11 @@ DIBHeader::~DIBHeader() {
 
 int DIBHeader::initFrom(const int fd, const uint32_t dibSize) const {
     switch (type) {
-        case BITMAPINFOHEADER:
-            static_cast<BITMAPINFOHEADER_T *>(data)->size = dibSize;
-        return init_BITMAPINFOHEADER(fd);
+        case BITMAP_INFO_HEADER:
+            static_cast<BITMAP_INFO_HEADER_T *>(data)->size = dibSize;
+        return init_BITMAP_INFO_HEADER(fd);
         default:
-            std::cerr << "DIB header structure is not handled!\n";
+            std::cerr << "[ERROR] DIB header structure is not handled!\n";
         return -1;
     }
 }
@@ -127,15 +127,15 @@ uint32_t DIBHeader::getSizeOfColorTable() const {
         return 0;
     switch (type)
     {
-    case BITMAPINFOHEADER:
+    case BITMAP_INFO_HEADER:
     {
-        auto *ptr = static_cast<BITMAPINFOHEADER_T *>(data);
+        auto *ptr = static_cast<BITMAP_INFO_HEADER_T *>(data);
         if (ptr->compression == BI_RGB && ptr->bitCount < 8)
             return ptr->usedColors;
         return 0;
     }
     default:
-        std::cerr << "DIB header structure is not handled!\n";
+        std::cerr << "[ERROR] DIB header structure is not handled!\n";
         break;
     }
     return 0;
@@ -144,10 +144,10 @@ uint32_t DIBHeader::getSizeOfColorTable() const {
 uint16_t DIBHeader::getBitCount() const {
     switch (type)
     {
-    case BITMAPINFOHEADER:
-        return getBitCount_BITMAPINFOHEADER();
+    case BITMAP_INFO_HEADER:
+        return getBitCount_BITMAP_INFO_HEADER();
     default:
-        std::cerr << "Unable to retrieve \'bitCount\' for dib header of size " << type << "\n";
+        std::cerr << "[ERROR] Unable to retrieve \'bitCount\' for dib header of size " << type << "\n";
         return 0;
     }
 }
@@ -155,10 +155,10 @@ uint16_t DIBHeader::getBitCount() const {
 uint32_t DIBHeader::getCompression() const {
     switch (type)
     {
-    case BITMAPINFOHEADER:
-        return getCompression_BITMAPINFOHEADER();
+    case BITMAP_INFO_HEADER:
+        return getCompression_BITMAP_INFO_HEADER();
     default:
-        std::cerr << "Unable to retrieve \'compression\' for dib header of size " << type << "\n";
+        std::cerr << "[ERROR] Unable to retrieve \'compression\' for dib header of size " << type << "\n";
         return 0;
     }
 }
@@ -166,10 +166,10 @@ uint32_t DIBHeader::getCompression() const {
 int32_t DIBHeader::getWidth() const {
     switch (type)
     {
-    case BITMAPINFOHEADER:
-        return getWidth_BITMAPINFOHEADER();
+    case BITMAP_INFO_HEADER:
+        return getWidth_BITMAP_INFO_HEADER();
     default:
-        std::cerr << "Unable to retrieve \'compression\' for dib header of size " << type << "\n";
+        std::cerr << "[ERROR] Unable to retrieve \'compression\' for dib header of size " << type << "\n";
         return 0;
     }
 }
@@ -177,64 +177,64 @@ int32_t DIBHeader::getWidth() const {
 int32_t DIBHeader::getHeight() const {
     switch (type)
     {
-    case BITMAPINFOHEADER:
-        return getHeight_BITMAPINFOHEADER();
+    case BITMAP_INFO_HEADER:
+        return getHeight_BITMAP_INFO_HEADER();
     default:
-        std::cerr << "Unable to retrieve \'compression\' for dib header of size " << type << "\n";
+        std::cerr << "[ERROR] Unable to retrieve \'compression\' for dib header of size " << type << "\n";
         return 0;
     }
 }
 
-int DIBHeader::init_BITMAPINFOHEADER(const int fd) const {
-    auto *ptr = static_cast<BITMAPINFOHEADER_T *>(data);
+int DIBHeader::init_BITMAP_INFO_HEADER(const int fd) const {
+    auto *ptr = static_cast<BITMAP_INFO_HEADER_T *>(data);
     if (read(fd, &(ptr->width), sizeof(ptr->width)) < 0)
     {
-        std::cerr << "Error while reading the \'width\'\n";
+        std::cerr << "[ERROR] Could not read the \'width\'\n";
         return -1;
     }
     if (read(fd, &(ptr->height), sizeof(ptr->height)) < 0)
     {
-        std::cerr << "Error while reading the \'height\'\n";
+        std::cerr << "[ERROR] Could not read the \'height\'\n";
         return -1;
     }
     if (read(fd, &(ptr->planes), sizeof(ptr->planes)) < 0)
     {
-        std::cerr << "Error while reading the \'planes\'\n";
+        std::cerr << "[ERROR] Could not read the \'planes\'\n";
         return -1;
     }
     if (read(fd, &(ptr->bitCount), sizeof(ptr->bitCount)) < 0)
     {
-        std::cerr << "Error while reading the \'bitCount\'\n";
+        std::cerr << "[ERROR] Could not read the \'bitCount\'\n";
         return -1;
     }
     if (read(fd, &(ptr->compression), sizeof(ptr->compression)) < 0)
     {
-        std::cerr << "Error while reading the \'compression\'\n";
+        std::cerr << "[ERROR] Could not read the \'compression\'\n";
         return -1;
     }
     if (read(fd, &(ptr->imageSize), sizeof(ptr->imageSize)) < 0)
     {
-        std::cerr << "Error while reading the \'imageSize\'\n";
+        std::cerr << "[ERROR] Could not read the \'imageSize\'\n";
         return -1;
     }
     if (read(fd, &(ptr->pixelsPerMeterOX), sizeof(ptr->pixelsPerMeterOX)) < 0)
     {
-        std::cerr << "Error while reading the \'pixelsPerMeterOX\'\n";
+        std::cerr << "[ERROR] Could not read the \'pixelsPerMeterOX\'\n";
         return -1;
     }
     if (read(fd, &(ptr->pixelsPerMeterOY), sizeof(ptr->pixelsPerMeterOY)) < 0)
     {
-        std::cerr << "Error while reading the \'pixelsPerMeterOY\'\n";
+        std::cerr << "[ERROR] Could not read the \'pixelsPerMeterOY\'\n";
         return -1;
     }
     if (read(fd, &(ptr->usedColors), sizeof(ptr->usedColors)) < 0)
     {
-        std::cerr << "Error while reading the \'usedColors\'\n";
+        std::cerr << "[ERROR] Could not read the \'usedColors\'\n";
         return -1;
     }
     if (read(fd, &(ptr->importantColors), sizeof(ptr->importantColors)) < 0)
     {
-        std::cerr << "Error while reading the \'importantColors\'\n";
+        std::cerr << "[ERROR] Could not read the \'importantColors\'\n";
         return -1;
     }
     return 0;
@@ -242,17 +242,17 @@ int DIBHeader::init_BITMAPINFOHEADER(const int fd) const {
 
 void DIBHeader::print() const {
     switch (type) {
-        case BITMAPINFOHEADER:
-            printHelper_BITMAPINFOHEADER();
+        case BITMAP_INFO_HEADER:
+            printHelper_BITMAP_INFO_HEADER();
         break;
         default:
-            std::cerr << "DIB header structure is not handled!\n";
+            std::cerr << "[ERROR] DIB header structure is not handled!\n";
         break;
     }
 }
 
-void DIBHeader::printHelper_BITMAPINFOHEADER() const {
-    const auto *ptr = static_cast<BITMAPINFOHEADER_T *>(data);
+void DIBHeader::printHelper_BITMAP_INFO_HEADER() const {
+    const auto *ptr = static_cast<BITMAP_INFO_HEADER_T *>(data);
     printf("===============DIB--HEADER===============\n");
     printf("Size: %08X\n", ptr->size);
     printf("Width: %08X\n", ptr->width);
@@ -268,18 +268,18 @@ void DIBHeader::printHelper_BITMAPINFOHEADER() const {
     printf("============END-OF-DIB-HEADER============\n");
 }
 
-uint16_t DIBHeader::getBitCount_BITMAPINFOHEADER() const {
-    return static_cast<BITMAPINFOHEADER_T *>(data)->bitCount;
+uint16_t DIBHeader::getBitCount_BITMAP_INFO_HEADER() const {
+    return static_cast<BITMAP_INFO_HEADER_T *>(data)->bitCount;
 }
 
-uint32_t DIBHeader::getCompression_BITMAPINFOHEADER() const {
-    return static_cast<BITMAPINFOHEADER_T *>(data)->compression;
+uint32_t DIBHeader::getCompression_BITMAP_INFO_HEADER() const {
+    return static_cast<BITMAP_INFO_HEADER_T *>(data)->compression;
 }
 
-int32_t DIBHeader::getWidth_BITMAPINFOHEADER() const {
-    return std::max(0, static_cast<BITMAPINFOHEADER_T *>(data)->width);
+int32_t DIBHeader::getWidth_BITMAP_INFO_HEADER() const {
+    return std::max(0, static_cast<BITMAP_INFO_HEADER_T *>(data)->width);
 }
 
-int32_t DIBHeader::getHeight_BITMAPINFOHEADER() const {
-    return std::max(0, static_cast<BITMAPINFOHEADER_T *>(data)->height);
+int32_t DIBHeader::getHeight_BITMAP_INFO_HEADER() const {
+    return std::max(0, static_cast<BITMAP_INFO_HEADER_T *>(data)->height);
 }

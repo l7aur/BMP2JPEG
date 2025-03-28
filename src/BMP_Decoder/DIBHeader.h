@@ -5,13 +5,13 @@
 
 enum DIB_TYPES
 {
-    BITMAPCOREHEADER = 12, // Same as OS21XBITMAPHEADER
-    OS22XBITMAPHEADER = 64,
-    BITMAPINFOHEADER = 40,
-    BITMAPV2INFOHEADER = 52,
-    BITMAPV3INFOHEADER = 56,
-    BITMAPV4HEADER = 108,
-    BITMAPV5HEADER = 124
+    BITMAP_CORE_HEADER = 12, // Same as OS21X_BITMAP_HEADER
+    OS22X_BITMAP_HEADER = 64,
+    BITMAP_INFO_HEADER = 40,
+    BITMAP_V2_INFO_HEADER = 52,
+    BITMAP_V3_INFO_HEADER = 56,
+    BITMAP_V4_HEADER = 108,
+    BITMAP_V5_HEADER = 124
 };
 
 enum COMPRESSION_TYPE
@@ -33,7 +33,7 @@ enum COMPRESSION_TYPE
 class DIBHeader
 {
 public:
-    DIB_TYPES type{BITMAPCOREHEADER};
+    DIB_TYPES type{BITMAP_CORE_HEADER};
     void *data{nullptr};
 
     explicit DIBHeader(uint32_t in_type);
@@ -47,11 +47,11 @@ public:
     void print() const;
 
 private:
-    [[nodiscard]] int init_BITMAPINFOHEADER(int fd) const;
-    void printHelper_BITMAPINFOHEADER() const;
+    [[nodiscard]] int init_BITMAP_INFO_HEADER(int fd) const;
+    void printHelper_BITMAP_INFO_HEADER() const;
 
-    [[nodiscard]] uint16_t getBitCount_BITMAPINFOHEADER() const;
-    [[nodiscard]] uint32_t getCompression_BITMAPINFOHEADER() const;
-    [[nodiscard]] int32_t getWidth_BITMAPINFOHEADER() const;
-    [[nodiscard]] int32_t getHeight_BITMAPINFOHEADER() const;
+    [[nodiscard]] uint16_t getBitCount_BITMAP_INFO_HEADER() const;
+    [[nodiscard]] uint32_t getCompression_BITMAP_INFO_HEADER() const;
+    [[nodiscard]] int32_t getWidth_BITMAP_INFO_HEADER() const;
+    [[nodiscard]] int32_t getHeight_BITMAP_INFO_HEADER() const;
 };

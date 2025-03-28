@@ -1,8 +1,7 @@
 #pragma once
 #include <cstdint>
 
-class JFIF
-{
+class JFIF {
 public:
     explicit JFIF(const char *folderPath, const char * fileName);
     ~JFIF() { cleanup(); };
