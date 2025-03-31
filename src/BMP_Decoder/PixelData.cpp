@@ -4,9 +4,7 @@
 #include <iostream>
 #include <unistd.h>
 
-PixelData::PixelData(const size_t s)
-    : dataSize(s)
-{
+PixelData::PixelData(size_t s) {
     data = new uint8_t[s];
 }
 
@@ -32,7 +30,7 @@ int PixelData::initFrom(const int fd, const unsigned int offset, const uint16_t 
         std::cerr << "[ERROR] Failed to reach pixel data starting point!\n";
         return -1;
     }
-    dataSize = read(fd, data, dataSize);
+    dataSize = read(fd, data, MAXIMUM_PXD_SIZE_IN_BYTES);
     if (dataSize < 0)
     {
         std::cerr << "[ERROR] Could not read \'pixel data\'\n";
@@ -101,14 +99,15 @@ void PixelData::print() const
     // colorTab->print();
 }
 
-const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imageHeight) const
-{
+const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imageHeight) const {
     switch (encoding)
     {
-    case C8:
-        return format_C8(imageWidth, imageHeight);
-    default:
-        std::cerr << "[ERROR] Unknown format! Unable to format pixel data!\n";
+        case C8:
+            return format_C8(imageWidth, imageHeight);
+        case C24:
+            return format_C24(imageWidth, imageHeight);
+        default:
+            std::cerr << "[ERROR] Unknown format! Unable to format pixel data!\n";
         break;
     }
     return nullptr;
@@ -119,12 +118,34 @@ const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight
     const int NUMBER_OF_PIXELS = imageHeight * imageWidth;
     auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
 
-    for (int y = 0; y < imageHeight; ++y) {
+    for (int y = 0; y < imageHeight; ++y)
         for (int x = 0; x < imageWidth; ++x) {
             const Util::Pixel3 p = colorTable->at(data[(imageHeight - 1 - y) * rowSize + x]);
-            pixels[y * imageWidth + x] = (p.r << 24) | (p.g << 16) | (p.b << 8) | p.a;
+            pixels[y * imageWidth + x] = (p.r << 24)
+                                        | (p.g << 16)
+                                        | (p.b << 8)
+                                        | p.a;
         }
-    }
+    return pixels;
+}
+
+const uint32_t * PixelData::format_C24(const int imageWidth, const int imageHeight) const {
+    const int rowSize = (imageWidth * 3 + 3) & ~3;
+    const int NUMBER_OF_PIXELS = imageHeight * imageWidth;
+    auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
+
+    std::cout << rowSize << std::endl;
+    for (int y = 0; y < imageHeight; ++y)
+        for (int x = 0; x < imageWidth; ++x) {
+            const int dataIndex = ((imageHeight - y - 1) * rowSize + x * 3);
+            const Util::Pixel3 p{data[dataIndex], data[dataIndex + 1], data[dataIndex + 2]};
+            pixels[y * imageWidth + x] = (p.b << 24)
+                                        | (p.g << 16)
+                                        | (p.r << 8)
+                                        | p.a;
+            // printf("%02x%02x%02xff\n", data[dataIndex], data[dataIndex+1], data[dataIndex+2]);
+            // std::cin.get();
+        }
     return pixels;
 }
 

@@ -8,8 +8,6 @@
 #include "DIBHeader.h"
 #include "PixelData.h"
 
-static constexpr unsigned int MAXIMUM_FILE_SIZE_IN_BYTES {500'000};
-
 BMP::BMP(const char *filePath)
     : path{filePath}
 {
@@ -70,7 +68,7 @@ int BMP::processDIBHeader() {
 }
 
 int BMP::processPixelData() {
-    pixelData = new PixelData(MAXIMUM_FILE_SIZE_IN_BYTES);
+    pixelData = new PixelData();
     if (pixelData->initFrom(fileDescriptor, fileHeader->pixelDataStartingAddress, dibHeader->getBitCount(), dibHeader->getCompression()) < 0)
     {
         std::cerr << "[ERROR] Pixel data initialization failed!\n";

@@ -8,7 +8,7 @@ namespace Util {
         union { uint8_t g, cb; };
         union { uint8_t b, cr; };
         union { uint8_t a, u; };
-        explicit Pixel3(const uint8_t x = 0x00, const uint8_t y = 0x00, const uint8_t z = 0x00, const uint8_t t = 0xFF)
+        explicit Pixel3(const uint8_t x = 0xFF, const uint8_t y = 0xFF, const uint8_t z = 0xFF, const uint8_t t = 0xFF)
             : r(x), g(y), b(z), a(t) {}
         explicit Pixel3(const uint32_t p) {
             r = p >> 24;

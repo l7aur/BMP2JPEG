@@ -5,8 +5,9 @@
 #include "Util/FreeFunctions.h"
 
 int main(int argc, char *argv[]) {
+    // constexpr char BMP_FILE_PATH[] = "Resources/saturn.bmp";
     // constexpr char BMP_FILE_PATH[] = "Resources/flowers_24bits.bmp";
-    constexpr char BMP_FILE_PATH[] = "Resources/saturn.bmp";
+    constexpr char BMP_FILE_PATH[] = "Resources/Lena_24bits.bmp";
     BMP bmpImg(BMP_FILE_PATH);
 
     int status = bmpImg.getFileDescriptor();
@@ -20,6 +21,8 @@ int main(int argc, char *argv[]) {
         std::cerr << "[ERROR] Exiting program, image of unsupported format!\n";
         return -1;
     }
+
+    bmpImg.print();
 
     //JFIF jfif{"./", "result"};
 

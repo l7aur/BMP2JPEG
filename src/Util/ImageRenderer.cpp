@@ -67,7 +67,7 @@ namespace Util {
             textureWidth,
             textureHeight);
         if (!texture) {
-            std::cerr << "Unable to create texture!\n";
+            std::cerr << "[ERROR] Unable to create texture!\n";
             std::cerr << SDL_GetError() << '\n';
             delete[] pixels;
             return -1;
