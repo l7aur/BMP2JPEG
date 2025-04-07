@@ -5,9 +5,10 @@
 #include "Util/FreeFunctions.h"
 
 int main(int argc, char *argv[]) {
-    // constexpr char BMP_FILE_PATH[] = "Resources/saturn.bmp";
+    constexpr char BMP_FILE_PATH[] = "Resources/moon_4bit.bmp";
     // constexpr char BMP_FILE_PATH[] = "Resources/flowers_24bits.bmp";
-    constexpr char BMP_FILE_PATH[] = "Resources/Lena_24bits.bmp";
+    // constexpr char BMP_FILE_PATH[] = "Resources/Lena_24bits.bmp";
+    // constexpr char BMP_FILE_PATH[] = "Resources/diagonal.bmp";
     BMP bmpImg(BMP_FILE_PATH);
 
     int status = bmpImg.getFileDescriptor();
@@ -24,13 +25,13 @@ int main(int argc, char *argv[]) {
 
     bmpImg.print();
 
-    //JFIF jfif{"./", "result"};
-
-    //status = jfif.encode(bmpImg.getPixelData(), bmpImg.getWidth(), bmpImg.getHeight());
-    //if (status < 0) {
-    //    std::cerr << "[ERROR] Image could not be converted to .jfif\n";
-    //    return -1;
-    //}
+    // const JFIF jfif{"./", "result"};
+    //
+    // status = jfif.encode(bmpImg.getPixelData(), bmpImg.getWidth(), bmpImg.getHeight());
+    // if (status < 0) {
+    //     std::cerr << "[ERROR] Image could not be converted to .jfif\n";
+    //     return -1;
+    // }
 
     Util::renderPixels(bmpImg.getWidth(), bmpImg.getHeight(), bmpImg.getPixelData());
 
