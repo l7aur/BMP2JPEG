@@ -121,3 +121,4 @@ For all practical purposes a JPEG file means a JPEG file in JFIF format.
 6. [JPEG Wiki](https://en.wikipedia.org/wiki/JPEG)
 7. [*Compressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](README_resources/book.pdf), Addison Wesley, 1999
 8. [Branch Education YouTube video](https://www.youtube.com/watch?v=Kv1Hiv3ox8I&list=WL&index=16&ab_channel=BranchEducation)
+9. [JFIF File Interchange Format, Version 1.02](https://web.archive.org/web/20120301195630/http:/www.jpeg.org/public/jfif.pdf)

@@ -20,17 +20,19 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    bmpImg.print();
+    // bmpImg.print();
 
-    // const JFIF jfif{"./", "result"};
-    //
-    // status = jfif.encode(bmpImg.getPixelData(), bmpImg.getWidth(), bmpImg.getHeight());
-    // if (status < 0) {
-    //     std::cerr << "[ERROR] Image could not be converted to .jfif\n";
-    //     return -1;
-    // }
+    const uint32_t * pxd = bmpImg.getPixelData();
 
-    Util::renderPixels(bmpImg.getWidth(), bmpImg.getHeight(), bmpImg.getPixelData());
+    const JFIF jfif{"./", "result"};
 
+    status = jfif.encode(pxd, bmpImg.getWidth(), bmpImg.getHeight());
+    if (status < 0) {
+        std::cerr << "[ERROR] Image could not be converted to .jfif\n";
+        return -1;
+    }
+
+    // debug
+    // Util::renderPixels(pxd, bmpImg.getWidth(), bmpImg.getHeight());
     return 0;
 }

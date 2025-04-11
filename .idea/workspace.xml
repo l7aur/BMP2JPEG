@@ -30,15 +30,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="fixed gitignore">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="centered texture in renderer&#10;fixed printing in file header&#10;fixed converting C4 to uint32_t">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/ColorTable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/FileHeader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/FileHeader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/ImageRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Pixel3.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/PixelRGBA.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/PixelRGBA.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Pixel4.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -545,7 +547,7 @@
       <workItem from="1743661445316" duration="540000" />
       <workItem from="1743788970805" duration="195000" />
       <workItem from="1744031054292" duration="6353000" />
-      <workItem from="1744347677245" duration="2766000" />
+      <workItem from="1744347677245" duration="8128000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -683,7 +685,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744347894267</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="centered texture in renderer&#10;fixed printing in file header&#10;fixed converting C4 to uint32_t">
+      <option name="closed" value="true" />
+      <created>1744350875434</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1744350875434</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -721,7 +731,8 @@
     <MESSAGE value="fixed c24 bmp to pixeldata" />
     <MESSAGE value="added C4 core, needs correction, not working" />
     <MESSAGE value="fixed gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed gitignore" />
+    <MESSAGE value="centered texture in renderer&#10;fixed printing in file header&#10;fixed converting C4 to uint32_t" />
+    <option name="LAST_COMMIT_MESSAGE" value="centered texture in renderer&#10;fixed printing in file header&#10;fixed converting C4 to uint32_t" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

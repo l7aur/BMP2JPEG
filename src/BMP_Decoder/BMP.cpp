@@ -29,6 +29,7 @@ int BMP::process() {
     return 0;
 }
 
+// make it return a std::unique_ptr
 const uint32_t * BMP::getPixelData() const {
     return pixelData->getAndFormatData(
         dibHeader->getWidth(),
