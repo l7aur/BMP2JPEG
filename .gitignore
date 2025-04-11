@@ -1,1 +1,3 @@
 result.jfif
+*.o
+./cmake-build-debug
