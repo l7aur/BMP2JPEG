@@ -5,10 +5,7 @@
 #include "Util/FreeFunctions.h"
 
 int main(int argc, char *argv[]) {
-    constexpr char BMP_FILE_PATH[] = "Resources/moon_4bit.bmp";
-    // constexpr char BMP_FILE_PATH[] = "Resources/flowers_24bits.bmp";
-    // constexpr char BMP_FILE_PATH[] = "Resources/Lena_24bits.bmp";
-    // constexpr char BMP_FILE_PATH[] = "Resources/diagonal.bmp";
+    constexpr char BMP_FILE_PATH[] = "Resources/flowers_24bits.bmp";
     BMP bmpImg(BMP_FILE_PATH);
 
     int status = bmpImg.getFileDescriptor();

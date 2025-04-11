@@ -13,8 +13,8 @@ namespace  Util {
         int initTexture(int imageWidth, int imageHeight, const uint32_t* pixels);
 
     private:
-        const int WINDOW_WIDTH{512};
-        const int IMAGE_HEIGHT{512};
+        const int WINDOW_WIDTH{1080};
+        const int WINDOW_HEIGHT{720};
         int textureWidth{0};
         int textureHeight{0};
         SDL_Window *window{nullptr};

@@ -36,10 +36,10 @@ int FileHeader::initFrom(const int fd)
 void FileHeader::print() const
 {
     printf("===============BMP--HEADER===============\n");
-    printf("Header field:\t\t\t%c%c\n", headerField[0], headerField[1]);
-    printf("File size:\t\t\t%08X\n", fileSize);
-    printf("Reserved field 1:\t\t%02X %02X\n", reservedField1[0], reservedField1[1]);
-    printf("Reserved field 2:\t\t%02X %02X\n", reservedField2[0], reservedField2[1]);
-    printf("Pixel data starting address:\t%08X\n", pixelDataStartingAddress);
+    printf("Header field: %c%c\n", headerField[0], headerField[1]);
+    printf("File size: %08X\n", fileSize);
+    printf("Reserved field 1: %02X %02X\n", reservedField1[0], reservedField1[1]);
+    printf("Reserved field 2: %02X %02X\n", reservedField2[0], reservedField2[1]);
+    printf("Pixel data starting address: %08X\n", pixelDataStartingAddress);
     printf("==============END-OF-HEADER==============\n");
 }

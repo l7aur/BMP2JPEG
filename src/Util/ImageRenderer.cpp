@@ -2,6 +2,8 @@
 
 #include "ImageRenderer.h"
 
+#include "FreeFunctions.h"
+
 namespace Util {
     ImageRenderer::~ImageRenderer()
     {
@@ -12,7 +14,8 @@ namespace Util {
 
     void ImageRenderer::runGameLoop() const
     {
-        const SDL_Rect displayRectangle = {0, 0, textureWidth, textureHeight};
+        const auto [y, x] = computeTLHCCoordinates(WINDOW_WIDTH, WINDOW_HEIGHT, textureWidth, textureHeight);
+        const SDL_Rect displayRectangle = {x, y, textureWidth, textureHeight};
         bool running = true;
         SDL_Event event;
         while (running)
@@ -88,7 +91,7 @@ namespace Util {
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
             WINDOW_WIDTH,
-            IMAGE_HEIGHT,
+            WINDOW_HEIGHT,
             SDL_WINDOW_SHOWN);
         if (!window)
         {

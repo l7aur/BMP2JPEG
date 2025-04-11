@@ -1,5 +1,5 @@
 #include "PixelData.h"
-#include "../Util/Pixel3.h"
+#include "../Util/PixelRGBA.h"
 
 #include <iostream>
 #include <unistd.h>
@@ -96,7 +96,9 @@ void PixelData::print() const
     std::cout << "Size of pixeldata: " << dataSize << '\n';
     std::cout << "Type of pixeldata: " << encoding << '\n';
     std::cout << "=============END-PIXEL-DATA==============\n";
-    colorTable->print();
+
+    if (colorTable != nullptr)
+        colorTable->print();
 }
 
 const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imageHeight) const {
@@ -116,16 +118,16 @@ const uint32_t *PixelData::getAndFormatData(const int imageWidth, const int imag
 }
 
 const uint32_t * PixelData::format_C4(const int imageWidth, const int imageHeight) const {
-    const int rowSize = (imageWidth + 3) & ~3;
-    const int NUMBER_OF_PIXELS = imageHeight * imageWidth * 2;
+    const int rowSize = (imageWidth / 2 + 3) & ~3;
+    const int NUMBER_OF_PIXELS = imageHeight * imageWidth;
     auto *pixels = new uint32_t[NUMBER_OF_PIXELS];
     std::cout << imageWidth <<' ' <<imageHeight << '\n';
 
     int index = 0;
     for (int y = 0; y < imageHeight; ++y)
-        for (int x = 0; x < imageWidth; ++x) {
-            const Util::Pixel3 higherPixel = colorTable->at((data[(imageHeight - 1 - y) * rowSize + x] & 0xF0) >> 4);
-            const Util::Pixel3 lowerPixel = colorTable->at(data[(imageHeight - 1 - y) * rowSize + x] & 0x0F);
+        for (int x = 0; x < imageWidth / 2; ++x) {
+            const Util::PixelRGBA higherPixel = colorTable->at((data[(imageHeight - 1 - y) * rowSize + x] & 0xF0) >> 4);
+            const Util::PixelRGBA lowerPixel = colorTable->at(data[(imageHeight - 1 - y) * rowSize + x] & 0x0F);
 
             pixels[index++] = (higherPixel.b << 24) | (higherPixel.g << 16) | (higherPixel.r << 8) | higherPixel.a;
             pixels[index++] = (lowerPixel.b << 24) | (lowerPixel.g << 16) | (lowerPixel.r << 8) | lowerPixel.a;
@@ -140,7 +142,7 @@ const uint32_t *PixelData::format_C8(const int imageWidth, const int imageHeight
 
     for (int y = 0; y < imageHeight; ++y)
         for (int x = 0; x < imageWidth; ++x) {
-            const Util::Pixel3 p = colorTable->at(data[(imageHeight - 1 - y) * rowSize + x]);
+            const Util::PixelRGBA p = colorTable->at(data[(imageHeight - 1 - y) * rowSize + x]);
             pixels[y * imageWidth + x] = (p.b << 24) | (p.g << 16) | (p.r << 8) | p.a;
         }
     return pixels;
@@ -154,7 +156,7 @@ const uint32_t * PixelData::format_C24(const int imageWidth, const int imageHeig
     for (int y = 0; y < imageHeight; ++y)
         for (int x = 0; x < imageWidth; ++x) {
             const int dataIndex = ((imageHeight - y - 1) * rowSize + 3 * x);
-            const Util::Pixel3 p{data[dataIndex], data[dataIndex + 1], data[dataIndex + 2]};
+            const Util::PixelRGBA p{data[dataIndex], data[dataIndex + 1], data[dataIndex + 2]};
             pixels[y * imageWidth + x] = (p.b << 24) | (p.g << 16) | (p.r << 8) | p.a;
         }
     return pixels;

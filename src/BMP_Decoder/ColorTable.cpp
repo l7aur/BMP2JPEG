@@ -12,11 +12,11 @@ int ColorTable::initFrom(const int fd) const {
     return 0;
 }
 
-Util::Pixel3 ColorTable::at(const uint8_t i) const {
+Util::PixelRGBA ColorTable::at(const uint8_t i) const {
     const int index = 4 * i;
     if (index > tableSize)
-        return Util::Pixel3{0xFF, 0xFF, 0xFF, 0xFF};
-    return Util::Pixel3{data[index + 2], data[index + 1], data[index], data[index + 3]};
+        return Util::PixelRGBA{0xFF, 0xFF, 0xFF, 0xFF};
+    return Util::PixelRGBA{data[index + 2], data[index + 1], data[index], data[index + 3]};
 }
 
 void ColorTable::print() const {
