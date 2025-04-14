@@ -23,7 +23,7 @@ add_executable(BMP2JPEG src/main.cpp
         src/JFIF_Encoder/JFIF.cpp
         src/JFIF_Encoder/JFIF.h
         src/Util/FreeFunctions.h
-        src/Util/PixelRGBA.h)
+        src/Util/Pixel4.h)
 
 target_include_directories(BMP2JPEG PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(BMP2JPEG PRIVATE ${SDL2_LIBRARIES})

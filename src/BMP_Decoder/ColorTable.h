@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Util/PixelRGBA.h"
+#include "../Util/Pixel4.h"
 
 #include <cstdint>
 #include <cstddef>
@@ -20,6 +20,6 @@ public:
     }
 
     [[nodiscard]] int initFrom(int fd) const;
-    [[nodiscard]] Util::PixelRGBA at(uint8_t i) const;
+    [[nodiscard]] Util::Pixel4 at(uint8_t i) const;
     void print() const;
 };
