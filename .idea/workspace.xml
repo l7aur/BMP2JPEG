@@ -29,14 +29,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="renamed">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added some std::string_views, refactored code in JFIF.cpp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/BMP.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,11 +134,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BMP2JPEG" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BMP2JPEG" TARGET_NAME="BMP2JPEG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BMP2JPEG" RUN_TARGET_NAME="BMP2JPEG">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -176,7 +166,8 @@
       <workItem from="1744031054292" duration="6353000" />
       <workItem from="1744347677245" duration="8160000" />
       <workItem from="1744636813205" duration="902000" />
-      <workItem from="1746174844563" duration="4495000" />
+      <workItem from="1746174844563" duration="4691000" />
+      <workItem from="1746179551667" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -338,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744641125860</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added some std::string_views, refactored code in JFIF.cpp">
+      <option name="closed" value="true" />
+      <created>1746179389534</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1746179389534</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +378,8 @@
     <MESSAGE value="centered texture in renderer&#10;fixed printing in file header&#10;fixed converting C4 to uint32_t" />
     <MESSAGE value="added APP 0 header in jfif&#10;refactoring and renaming" />
     <MESSAGE value="renamed" />
-    <option name="LAST_COMMIT_MESSAGE" value="renamed" />
+    <MESSAGE value="added some std::string_views, refactored code in JFIF.cpp" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some std::string_views, refactored code in JFIF.cpp" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

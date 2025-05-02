@@ -8,7 +8,7 @@
 typedef uint16_t marker;
 static constexpr unsigned int MARKER_SIZE_BYTES{ 2 };
 
-static const std::map<std::string, marker> MARKERS {
+static const std::map<const std::string, const marker> MARKERS {
             {"TEM", 0x01'FF},
             {"RST0", 0xD0'FF},{"RST1", 0xD1'FF},{"RST2", 0xD2'FF},{"RST3", 0xD3'FF},
             {"RST4", 0xD4'FF},{"RST5", 0xD5'FF},{"RST6", 0xD6'FF},{"RST7", 0xD7'FF},
