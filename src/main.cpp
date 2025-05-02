@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 
     const uint32_t * pxd = bmpImg.getPixelData();
 
-    const JFIF jfif{"./", "result"};
+    const JFIF jfif{"./Resources/Converted/", "result"};
 
     status = jfif.encode(pxd, bmpImg.getWidth(), bmpImg.getHeight());
     if (status < 0) {

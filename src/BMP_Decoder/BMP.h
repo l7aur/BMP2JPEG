@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 struct FileHeader;
 struct DIBHeader;
@@ -13,22 +14,24 @@ struct PixelData;
 class BMP final
 {
 public:
-    explicit BMP(const char *filePath);
+    explicit BMP(std::string filePath);
     ~BMP() { cleanup(); }
-    void print() const;
-    int process();
+
     [[nodiscard]] const uint32_t *getPixelData() const ;
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getHeight() const;
     [[nodiscard]] int getFileDescriptor() const;
-    [[nodiscard]] const char* getPath() const;
+    [[nodiscard]] std::string getPath() const;
+
+    int process();
+    void print() const;
 
 private:
     FileHeader *fileHeader{nullptr};
     DIBHeader *dibHeader{nullptr};
     PixelData *pixelData{nullptr};
     int fileDescriptor{-1};
-    const char* path{nullptr};
+    const std::string path{};
 
     int processFileHeader();
     int processDIBHeader();

@@ -2,16 +2,17 @@
 
 #include <fcntl.h>
 #include <iostream>
+#include <utility>
 #include <unistd.h>
 
 #include "FileHeader.h"
 #include "DIBHeader.h"
 #include "PixelData.h"
 
-BMP::BMP(const char *filePath)
-    : path{filePath}
+BMP::BMP(std::string filePath)
+    : path{std::move(filePath)}
 {
-    fileDescriptor = open(filePath, O_RDONLY);
+    fileDescriptor = open(path.c_str(), O_RDONLY);
 }
 
 void BMP::print() const {
@@ -48,7 +49,7 @@ int BMP::getFileDescriptor() const {
     return fileDescriptor;
 }
 
-const char * BMP::getPath() const {
+std::string BMP::getPath() const {
     return path;
 }
 

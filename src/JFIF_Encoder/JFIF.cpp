@@ -2,7 +2,6 @@
 
 #include <fcntl.h>
 #include <iostream>
-#include <string>
 #include <unistd.h>
 #include <map>
 
@@ -28,8 +27,8 @@ static const std::map<std::string, marker> MARKERS {
     /* more markers, but unused */
 };
 
-JFIF::JFIF(const char *folderPath, const char *fileName) {
-    std::string filePathStr = folderPath;
+JFIF::JFIF(const std::string_view& folderPath, const std::string_view& fileName) {
+    std::string filePathStr = folderPath.data();
     filePathStr.append("/");
     filePathStr.append(fileName);
     filePathStr.append(".jfif");
@@ -52,16 +51,7 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height) cons
     status = writeAPP0Header();
     if (status < 0) return -1;
 
-    status = writeMarker("COM");
-    if (status < 0) return -1;
-
-    status = writeMarker("SOF0");
-    if (status < 0) return -1;
-
-    status = writeMarker("DQT");
-    if (status < 0) return -1;
-
-    status = writeMarker("DRI");
+    status = writeDQTMarker();
     if (status < 0) return -1;
 
     status = writeMarker("DHT");
@@ -73,7 +63,11 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height) cons
     status = writeMarker("EOI");
     if (status < 0) return -1;
 
+    std::cout << "[ERROR] Successfully created the .jfif file!\n";
     return 0;
+}
+
+void JFIF::print() const {
 }
 
 int JFIF::writeMarker(const char* markerId) const {
@@ -88,9 +82,8 @@ int JFIF::writeMarker(const char* markerId) const {
 }
 
 int JFIF::writeAPP0Header() const {
-    // Marker
-    ssize_t status = writeMarker("APP0");
-    if (status < 0) return -1;
+    if (writeMarker("APP0") < 0)
+        return -1;
 
     std::string segmentData;
     segmentData.append("JFIF\0", 5);    // Identifier
@@ -101,15 +94,26 @@ int JFIF::writeAPP0Header() const {
     segmentData.append("\x00", 1);      // X thumbnail
     segmentData.append("\x00", 1);      // Y thumbnail
                                             // no Thumbnail
+    return writeSegmentData(segmentData);
+}
 
+int JFIF::writeDQTMarker() const {
+    if (writeMarker("DQT") < 0)
+        return -1;
+
+    std::string segmentData;
+    // segmentData.append("", );
+    return writeSegmentData(segmentData);
+}
+
+int JFIF::writeSegmentData(const std::string_view& segmentData) const {
     const uint16_t segmentSize = segmentData.size() + 2;
     const uint8_t sizeBuffer[2] = { static_cast<uint8_t>((segmentSize >> 8) & 0xFF), static_cast<uint8_t>(segmentSize & 0xFF) };
 
-    status = write(fileDescriptor, sizeBuffer, sizeof(sizeBuffer));
-    if (status < 0) return -1;
-
-    status = write(fileDescriptor, segmentData.data(), segmentData.size());
-    if (status < 0) return -1;
+    if (write(fileDescriptor, sizeBuffer, sizeof(sizeBuffer)) < 0)
+        return -1;
+    if (write(fileDescriptor, segmentData.data(), segmentData.size()) < 0)
+        return -1;
 
     return 0;
 }
