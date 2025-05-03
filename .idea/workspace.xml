@@ -29,9 +29,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added some std::string_views, refactored code in JFIF.cpp">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added constness to MARKER map">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +167,8 @@
       <workItem from="1744347677245" duration="8160000" />
       <workItem from="1744636813205" duration="902000" />
       <workItem from="1746174844563" duration="4691000" />
-      <workItem from="1746179551667" duration="1000" />
+      <workItem from="1746179551667" duration="38000" />
+      <workItem from="1746255709172" duration="1877000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -337,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746179389534</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added constness to MARKER map">
+      <option name="closed" value="true" />
+      <created>1746179575207</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1746179575207</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +388,8 @@
     <MESSAGE value="added APP 0 header in jfif&#10;refactoring and renaming" />
     <MESSAGE value="renamed" />
     <MESSAGE value="added some std::string_views, refactored code in JFIF.cpp" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some std::string_views, refactored code in JFIF.cpp" />
+    <MESSAGE value="added constness to MARKER map" />
+    <option name="LAST_COMMIT_MESSAGE" value="added constness to MARKER map" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
