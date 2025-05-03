@@ -29,9 +29,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added constness to MARKER map">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added bibliography">
+      <change afterPath="$PROJECT_DIR$/README_resources/Parker M., Dhanani S. - Digital Video Processing for Engineers. A Foundation for Embedded Systems Design.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +128,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/README_resources" />
       <recent name="$PROJECT_DIR$/src/Util" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
@@ -168,7 +170,8 @@
       <workItem from="1744636813205" duration="902000" />
       <workItem from="1746174844563" duration="4691000" />
       <workItem from="1746179551667" duration="38000" />
-      <workItem from="1746255709172" duration="1877000" />
+      <workItem from="1746255709172" duration="1925000" />
+      <workItem from="1746296102862" duration="4164000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -346,7 +349,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746179575207</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="added bibliography">
+      <option name="closed" value="true" />
+      <created>1746266558846</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1746266558846</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added bibliography">
+      <option name="closed" value="true" />
+      <created>1746266579709</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1746266579709</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +408,8 @@
     <MESSAGE value="renamed" />
     <MESSAGE value="added some std::string_views, refactored code in JFIF.cpp" />
     <MESSAGE value="added constness to MARKER map" />
-    <option name="LAST_COMMIT_MESSAGE" value="added constness to MARKER map" />
+    <MESSAGE value="added bibliography" />
+    <option name="LAST_COMMIT_MESSAGE" value="added bibliography" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
