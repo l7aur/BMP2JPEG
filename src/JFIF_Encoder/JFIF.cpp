@@ -79,12 +79,12 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, int 
     }
 
     if (writeMarker("SOI") < 0) return -1;
-    if (writeAPP0Header() < 0) return -1;
+    if (writeAPP0Segment() < 0) return -1;
     // if (writeCOMMarker() < 0) return -1;
-    if (writeDQTMarkers() < 0) return -1;
-    if (writeSOFMarker(width, height) < 0) return -1;
-    if (writeMarker("DHT") < 0) return -1;
-    if (writeMarker("SOS") < 0) return -1;
+    if (writeDQTSegments() < 0) return -1;
+    if (writeSOFSegment(width, height) < 0) return -1;
+    if (writeDHTSegment() < 0) return -1;
+    if (writeSOSSegment() < 0) return -1;
     if (writeMarker("EOI") < 0) return -1;
 
     std::cout << "[ERROR] Successfully created the .jfif file!\n";
@@ -102,7 +102,7 @@ int JFIF::writeMarker(const char* markerId) const {
     }
 }
 
-int JFIF::writeAPP0Header() const {
+int JFIF::writeAPP0Segment() const {
     if (writeMarker("APP0") < 0)
         return -1;
 
@@ -118,13 +118,13 @@ int JFIF::writeAPP0Header() const {
     return writeSegmentData(segmentData);
 }
 
-int JFIF::writeDQTMarkers() const {
+int JFIF::writeDQTSegments() const {
     if (writeLuminanceDQTMarker() < 0) return -1;
     if (writeChrominanceDQTMarker() < 0) return -1;
     return 0;
 }
 
-int JFIF::writeSOFMarker(const int width, const int height) const {
+int JFIF::writeSOFSegment(const int width, const int height) const {
     if (writeMarker("SOF0") < 0) return -1;
 
     std::vector<uint8_t> segmentData;
@@ -140,6 +140,24 @@ int JFIF::writeSOFMarker(const int width, const int height) const {
     segmentData.insert(segmentData.end(), {0x01, 0b0010'0010, 0x00}); // Y
     segmentData.insert(segmentData.end(), {0x02, 0b0001'0001, 0x01}); // Cb
     segmentData.insert(segmentData.end(), {0x03, 0b0001'0001, 0x01}); // Cr
+
+    return writeSegmentData(segmentData);
+}
+
+int JFIF::writeDHTSegment() const {
+    if (writeMarker("DHT") < 0) return -1;
+
+    std::vector<uint8_t> segmentData;
+    segmentData.push_back(0b0000'0000); // table class ' table identifier
+    segmentData.insert(segmentData.end(), {}); //16-byte vector whose sum need to be used to fill the next of the segment
+
+    return writeSegmentData(segmentData);
+}
+
+int JFIF::writeSOSSegment() const {
+    if (writeMarker("SOS") < 0) return -1;
+
+    std::vector<uint8_t> segmentData;
 
     return writeSegmentData(segmentData);
 }

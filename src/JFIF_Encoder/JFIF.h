@@ -17,9 +17,11 @@ private:
 
     [[nodiscard]] int writeMarker(const char* markerId) const;
 
-    [[nodiscard]] int writeAPP0Header() const;
-    [[nodiscard]] int writeDQTMarkers() const;
-    [[nodiscard]] int writeSOFMarker(int width, int height) const;
+    [[nodiscard]] int writeAPP0Segment() const;
+    [[nodiscard]] int writeDQTSegments() const;
+    [[nodiscard]] int writeSOFSegment(int width, int height) const;
+    [[nodiscard]] int writeDHTSegment() const;
+    [[nodiscard]] int writeSOSSegment() const;
     [[nodiscard]] int writeCOMMarker() const;
 
     [[nodiscard]] int writeLuminanceDQTMarker() const;
