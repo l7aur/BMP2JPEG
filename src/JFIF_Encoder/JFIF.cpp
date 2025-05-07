@@ -6,6 +6,8 @@
 #include <map>
 #include <array>
 
+#include "../Util/FreeFunctions.h"
+
 typedef uint16_t marker;
 namespace {
     constexpr unsigned int MARKER_SIZE_BYTES{ 2 };
@@ -80,6 +82,7 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, int 
     if (writeAPP0Header() < 0) return -1;
     // if (writeCOMMarker() < 0) return -1;
     if (writeDQTMarkers() < 0) return -1;
+    if (writeSOFMarker(width, height) < 0) return -1;
     if (writeMarker("DHT") < 0) return -1;
     if (writeMarker("SOS") < 0) return -1;
     if (writeMarker("EOI") < 0) return -1;
@@ -119,6 +122,26 @@ int JFIF::writeDQTMarkers() const {
     if (writeLuminanceDQTMarker() < 0) return -1;
     if (writeChrominanceDQTMarker() < 0) return -1;
     return 0;
+}
+
+int JFIF::writeSOFMarker(const int width, const int height) const {
+    if (writeMarker("SOF0") < 0) return -1;
+
+    std::vector<uint8_t> segmentData;
+    segmentData.push_back(0x08); // 8-bit precision
+
+    std::vector byteHeight = Util::convertIntToTwoByte(height);
+    std::vector byteWidth = Util::convertIntToTwoByte(width);
+    segmentData.insert(segmentData.end(), byteHeight.begin(), byteHeight.end()); // image height
+    segmentData.insert(segmentData.end(), byteWidth.begin(), byteWidth.end()); // image width
+
+    segmentData.push_back(0x03); // number of components
+    // component ID, horizontal sampling ' vertical sampling, quantization table
+    segmentData.insert(segmentData.end(), {0x01, 0b0010'0010, 0x00}); // Y
+    segmentData.insert(segmentData.end(), {0x02, 0b0001'0001, 0x01}); // Cb
+    segmentData.insert(segmentData.end(), {0x03, 0b0001'0001, 0x01}); // Cr
+
+    return writeSegmentData(segmentData);
 }
 
 int JFIF::writeCOMMarker() const {

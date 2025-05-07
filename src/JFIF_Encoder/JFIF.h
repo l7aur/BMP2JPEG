@@ -19,6 +19,7 @@ private:
 
     [[nodiscard]] int writeAPP0Header() const;
     [[nodiscard]] int writeDQTMarkers() const;
+    [[nodiscard]] int writeSOFMarker(int width, int height) const;
     [[nodiscard]] int writeCOMMarker() const;
 
     [[nodiscard]] int writeLuminanceDQTMarker() const;
