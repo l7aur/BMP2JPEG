@@ -29,9 +29,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="renaming template for DHT and SOS">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="finished SOS marker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/DIBHeader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMP_Decoder/PixelData.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +188,7 @@
       <workItem from="1746451351323" duration="61000" />
       <workItem from="1746469999020" duration="678000" />
       <workItem from="1746609945427" duration="7023000" />
-      <workItem from="1746639405525" duration="6476000" />
+      <workItem from="1746639405525" duration="7261000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -411,7 +414,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746646660401</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="finished SOS marker">
+      <option name="closed" value="true" />
+      <created>1746647897103</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1746647897103</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +445,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test2" />
     <MESSAGE value="gitignore update" />
     <MESSAGE value="idk" />
     <MESSAGE value="added Util namespace&#10;refactored code&#10;texture updates" />
@@ -459,7 +469,8 @@
     <MESSAGE value="added quantization tables, cleaned-up code, refactored" />
     <MESSAGE value="added the SOF marker" />
     <MESSAGE value="renaming template for DHT and SOS" />
-    <option name="LAST_COMMIT_MESSAGE" value="renaming template for DHT and SOS" />
+    <MESSAGE value="finished SOS marker" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished SOS marker" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

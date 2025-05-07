@@ -15,17 +15,16 @@ enum PIXEL_DATA_ENCODING
     C8COMPRESSED
 };
 
-static constexpr unsigned int MAXIMUM_PXD_SIZE_IN_BYTES {500'000};
-
 class PixelData
 {
 public:
     uint8_t *data{nullptr};
     ColorTable *colorTable{nullptr};
     size_t dataSize{0};
+    const size_t declaredDataSize{0};
     PIXEL_DATA_ENCODING encoding{BW1};
 
-    explicit PixelData(size_t s = MAXIMUM_PXD_SIZE_IN_BYTES);
+    explicit PixelData(size_t s);
     ~PixelData();
     int initFrom(int fd, int unsigned offset, uint16_t bitCount, uint32_t compression);
     void print() const;

@@ -33,7 +33,7 @@ enum COMPRESSION_TYPE
 class DIBHeader
 {
 public:
-    DIB_TYPES type{BITMAP_CORE_HEADER};
+    DIB_TYPES type{BITMAP_INFO_HEADER};
     void *data{nullptr};
 
     explicit DIBHeader(uint32_t in_type);
@@ -47,11 +47,11 @@ public:
     void print() const;
 
 private:
-    [[nodiscard]] int init_BITMAP_INFO_HEADER(int fd) const;
-    void printHelper_BITMAP_INFO_HEADER() const;
+    [[nodiscard]] int initBitmapInfoHeaderType(int fd) const;
+    void printBitmapInfoHeader() const;
 
-    [[nodiscard]] uint16_t getBitCount_BITMAP_INFO_HEADER() const;
-    [[nodiscard]] uint32_t getCompression_BITMAP_INFO_HEADER() const;
-    [[nodiscard]] int32_t getWidth_BITMAP_INFO_HEADER() const;
-    [[nodiscard]] int32_t getHeight_BITMAP_INFO_HEADER() const;
+    [[nodiscard]] uint16_t getBitCountBitmapInfoHeader() const;
+    [[nodiscard]] uint32_t getCompressionBitmapInfoHeader() const;
+    [[nodiscard]] int32_t getWidthBitmapInfoHeader() const;
+    [[nodiscard]] int32_t getHeightBitmapInfoHeader() const;
 };

@@ -4,8 +4,10 @@
 #include <iostream>
 #include <unistd.h>
 
-PixelData::PixelData(size_t s) {
-    data = new uint8_t[s];
+PixelData::PixelData(const size_t s)
+    : declaredDataSize(s)
+{
+    data = new uint8_t[declaredDataSize];
 }
 
 PixelData::~PixelData()
@@ -30,8 +32,8 @@ int PixelData::initFrom(const int fd, const unsigned int offset, const uint16_t 
         std::cerr << "[ERROR] Failed to reach pixel data starting point!\n";
         return -1;
     }
-    dataSize = read(fd, data, MAXIMUM_PXD_SIZE_IN_BYTES);
-    if (dataSize < 0)
+    dataSize = read(fd, data, declaredDataSize);
+    if (dataSize != declaredDataSize)
     {
         std::cerr << "[ERROR] Could not read \'pixel data\'\n";
         return -1;

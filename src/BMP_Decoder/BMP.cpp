@@ -72,7 +72,7 @@ int BMP::processDIBHeader() {
 }
 
 int BMP::processPixelData() {
-    pixelData = new PixelData();
+    pixelData = new PixelData(dibHeader->getWidth() * dibHeader->getHeight() * dibHeader->getBitCount() / 8);
     if (pixelData->initFrom(fileDescriptor, fileHeader->pixelDataStartingAddress, dibHeader->getBitCount(), dibHeader->getCompression()) < 0)
     {
         std::cerr << "[ERROR] Pixel data initialization failed!\n";

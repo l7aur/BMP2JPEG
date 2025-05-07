@@ -9,12 +9,12 @@ struct BITMAP_CORE_HEADER_T {
 struct OS22X_BITMAP_HEADER_T {
 
 };
-struct BITMAP_INFO_HEADER_T {
+struct BitmapInfoHeaderType {
     uint32_t size{0};                       // size of the structure in bytes
     int32_t width{0};                       // width in pixels
     int32_t height{0};                      // height in pixels
-                                            // for uncompressed RGB bitmaps, if it positive the bitmap is bottom-up, with the DIB origin at the lower left corner
-                                            //                               if it is negative the bitmap is a top-down DIB with the origin at the upper right corner
+                                            // for uncompressed RGB bitmaps, if it positive the bitmap is bottom-up, with the DIB origin in the lower left corner
+                                            //                               if it is negative the bitmap is a top-down DIB with the origin in the upper right corner
                                             // for YUV bitmaps, the bitmap is always top-down regardless of sign
                                             // for compressed formats it has to be positive
     uint16_t planes{0};                     // number of planes, must be 1
@@ -82,7 +82,7 @@ DIBHeader::DIBHeader(const uint32_t in_type) {
         break;
     case BITMAP_INFO_HEADER:
         type = BITMAP_INFO_HEADER;
-        data = malloc(sizeof(BITMAP_INFO_HEADER_T));
+        data = new BitmapInfoHeaderType{};
         break;
     case BITMAP_V2_INFO_HEADER:
         type = BITMAP_V2_INFO_HEADER;
@@ -114,8 +114,8 @@ DIBHeader::~DIBHeader() {
 int DIBHeader::initFrom(const int fd, const uint32_t dibSize) const {
     switch (type) {
         case BITMAP_INFO_HEADER:
-            static_cast<BITMAP_INFO_HEADER_T *>(data)->size = dibSize;
-        return init_BITMAP_INFO_HEADER(fd);
+            static_cast<BitmapInfoHeaderType *>(data)->size = dibSize;
+        return initBitmapInfoHeaderType(fd);
         default:
             std::cerr << "[ERROR] DIB header structure is not handled!\n";
         return -1;
@@ -129,7 +129,7 @@ uint32_t DIBHeader::getSizeOfColorTable() const {
     {
     case BITMAP_INFO_HEADER:
     {
-        auto *ptr = static_cast<BITMAP_INFO_HEADER_T *>(data);
+        auto *ptr = static_cast<BitmapInfoHeaderType *>(data);
         if (ptr->compression == BI_RGB && ptr->bitCount < 8)
             return ptr->usedColors;
         return 0;
@@ -145,7 +145,7 @@ uint16_t DIBHeader::getBitCount() const {
     switch (type)
     {
     case BITMAP_INFO_HEADER:
-        return getBitCount_BITMAP_INFO_HEADER();
+        return getBitCountBitmapInfoHeader();
     default:
         std::cerr << "[ERROR] Unable to retrieve \'bitCount\' for dib header of size " << type << "\n";
         return 0;
@@ -156,7 +156,7 @@ uint32_t DIBHeader::getCompression() const {
     switch (type)
     {
     case BITMAP_INFO_HEADER:
-        return getCompression_BITMAP_INFO_HEADER();
+        return getCompressionBitmapInfoHeader();
     default:
         std::cerr << "[ERROR] Unable to retrieve \'compression\' for dib header of size " << type << "\n";
         return 0;
@@ -167,7 +167,7 @@ int32_t DIBHeader::getWidth() const {
     switch (type)
     {
     case BITMAP_INFO_HEADER:
-        return getWidth_BITMAP_INFO_HEADER();
+        return getWidthBitmapInfoHeader();
     default:
         std::cerr << "[ERROR] Unable to retrieve \'compression\' for dib header of size " << type << "\n";
         return 0;
@@ -178,15 +178,15 @@ int32_t DIBHeader::getHeight() const {
     switch (type)
     {
     case BITMAP_INFO_HEADER:
-        return getHeight_BITMAP_INFO_HEADER();
+        return getHeightBitmapInfoHeader();
     default:
         std::cerr << "[ERROR] Unable to retrieve \'compression\' for dib header of size " << type << "\n";
         return 0;
     }
 }
 
-int DIBHeader::init_BITMAP_INFO_HEADER(const int fd) const {
-    auto *ptr = static_cast<BITMAP_INFO_HEADER_T *>(data);
+int DIBHeader::initBitmapInfoHeaderType(const int fd) const {
+    auto *ptr = static_cast<BitmapInfoHeaderType *>(data);
     if (read(fd, &(ptr->width), sizeof(ptr->width)) < 0)
     {
         std::cerr << "[ERROR] Could not read the \'width\'\n";
@@ -243,7 +243,7 @@ int DIBHeader::init_BITMAP_INFO_HEADER(const int fd) const {
 void DIBHeader::print() const {
     switch (type) {
         case BITMAP_INFO_HEADER:
-            printHelper_BITMAP_INFO_HEADER();
+            printBitmapInfoHeader();
         break;
         default:
             std::cerr << "[ERROR] DIB header structure is not handled!\n";
@@ -251,8 +251,8 @@ void DIBHeader::print() const {
     }
 }
 
-void DIBHeader::printHelper_BITMAP_INFO_HEADER() const {
-    const auto *ptr = static_cast<BITMAP_INFO_HEADER_T *>(data);
+void DIBHeader::printBitmapInfoHeader() const {
+    const auto *ptr = static_cast<BitmapInfoHeaderType *>(data);
     printf("===============DIB--HEADER===============\n");
     printf("Size: %08X\n", ptr->size);
     printf("Width: %08X\n", ptr->width);
@@ -268,18 +268,18 @@ void DIBHeader::printHelper_BITMAP_INFO_HEADER() const {
     printf("============END-OF-DIB-HEADER============\n");
 }
 
-uint16_t DIBHeader::getBitCount_BITMAP_INFO_HEADER() const {
-    return static_cast<BITMAP_INFO_HEADER_T *>(data)->bitCount;
+uint16_t DIBHeader::getBitCountBitmapInfoHeader() const {
+    return static_cast<BitmapInfoHeaderType *>(data)->bitCount;
 }
 
-uint32_t DIBHeader::getCompression_BITMAP_INFO_HEADER() const {
-    return static_cast<BITMAP_INFO_HEADER_T *>(data)->compression;
+uint32_t DIBHeader::getCompressionBitmapInfoHeader() const {
+    return static_cast<BitmapInfoHeaderType *>(data)->compression;
 }
 
-int32_t DIBHeader::getWidth_BITMAP_INFO_HEADER() const {
-    return std::max(0, static_cast<BITMAP_INFO_HEADER_T *>(data)->width);
+int32_t DIBHeader::getWidthBitmapInfoHeader() const {
+    return std::max(0, static_cast<BitmapInfoHeaderType *>(data)->width);
 }
 
-int32_t DIBHeader::getHeight_BITMAP_INFO_HEADER() const {
-    return std::max(0, static_cast<BITMAP_INFO_HEADER_T *>(data)->height);
+int32_t DIBHeader::getHeightBitmapInfoHeader() const {
+    return std::max(0, static_cast<BitmapInfoHeaderType *>(data)->height);
 }
