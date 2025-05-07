@@ -20,7 +20,7 @@ public:
     [[nodiscard]] const uint32_t *getPixelData() const ;
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getHeight() const;
-    [[nodiscard]] int getFileDescriptor() const;
+    [[nodiscard]] bool isOpen() const;
     [[nodiscard]] std::string getPath() const;
 
     int process();

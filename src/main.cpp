@@ -6,11 +6,12 @@
 
 int main(int argc, char *argv[]) {
     constexpr char BMP_FILE_PATH[] = "Resources/flowers_24bits.bmp";
-    BMP bmpImg(BMP_FILE_PATH);
+    constexpr int jpegCompressionQuality = 90;
 
-    int status = bmpImg.getFileDescriptor();
+    BMP bmpImg(BMP_FILE_PATH);
+    int status = bmpImg.isOpen();
     if (status < 0) {
-        std::cerr << "[ERROR] File \'" << bmpImg.getPath() << "\' could not be opened!\n";
+        std::cerr << "[ERROR] File \'" << BMP_FILE_PATH << "\' could not be opened!\n";
         return -1;
     }
 
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
 
     const JFIF jfif{"./Resources/Converted/", "result"};
 
-    status = jfif.encode(pxd, bmpImg.getWidth(), bmpImg.getHeight());
+    status = jfif.encode(pxd, bmpImg.getWidth(), bmpImg.getHeight(), jpegCompressionQuality);
     if (status < 0) {
         std::cerr << "[ERROR] Image could not be converted to .jfif\n";
         return -1;

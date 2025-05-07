@@ -25,6 +25,8 @@ void BMP::print() const {
 }
 
 int BMP::process() {
+    if (fileDescriptor < 0)
+        return -1;
     if (processFileHeader() < 0 || processDIBHeader() < 0 || /*processEBMask() < 0 ||*/ processPixelData())
         return -1;
     return 0;
@@ -45,8 +47,8 @@ int BMP::getHeight() const {
     return dibHeader->getHeight();
 }
 
-int BMP::getFileDescriptor() const {
-    return fileDescriptor;
+bool BMP::isOpen() const {
+    return (fileDescriptor != -1);
 }
 
 std::string BMP::getPath() const {

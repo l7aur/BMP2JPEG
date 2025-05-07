@@ -4,7 +4,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <map>
-#include <vector>
+#include <array>
 
 typedef uint16_t marker;
 namespace {
@@ -29,29 +29,30 @@ namespace {
         /* more markers, but redundant */
     };
 
-    // taken from - Parker & Dhanani, Chapter 13 - pag 105
-    const std::vector<uint16_t> LUMINANCE_QUANTIZATION_TABLE {
-        0x10, 0x0B, 0x0A, 0x10, 0x18, 0x28, 0x33, 0x3D,
-        0x0C, 0x0C, 0x0E, 0x13, 0x1A, 0x3A, 0x3C, 0x37,
-        0x0E, 0x0D, 0x10, 0x18, 0x28, 0x39, 0x45, 0x38,
-        0x0D, 0x11, 0x16, 0x1D, 0x33, 0x57, 0x50, 0x3E,
-        0x12, 0x16, 0x25, 0x38, 0x44, 0x6D, 0x67, 0x4D,
-        0x18, 0x23, 0x37, 0x40, 0x51, 0x68, 0x71, 0x5C,
-        0x31, 0x40, 0x4E, 0x57, 0x67, 0x79, 0x70, 0x65,
-        0x48, 0x5C, 0x5F, 0x62, 0x70, 0x64, 0x67, 0x66
+    /* taken from Digital Video Processing for Engineers, Suhel Dhanani, Michael Parker */
+    constexpr std::array LUMINANCE_QUANTIZATION_TABLE {
+        16, 11, 10, 16, 24, 40, 51, 61,
+        12, 12, 14, 19, 26, 58, 60, 55,
+        14, 13, 16, 24, 40, 57, 69, 56,
+        14, 17, 22, 29, 51, 87, 80, 62,
+        18, 22, 37, 56, 68, 109, 103, 77,
+        24, 35, 55, 64, 81, 104, 113, 92,
+        49, 64, 78, 87, 103, 121, 120, 101,
+        72, 92, 95, 98, 112, 100, 103, 99
     };
 
-    // taken from - Parker & Dhanani, Chapter 13 - pag 105
-    const std::vector<uint16_t> CHROMINANCE_QUANTIZATION_TABLE {
-        0x11, 0x12, 0x18, 0x2F, 0x63, 0x63, 0x63, 0x63,
-        0x12, 0x15, 0x1A, 0x42, 0x63, 0x63, 0x63, 0x63,
-        0x18, 0x1A, 0x38, 0x63, 0x63, 0x63, 0x63, 0x63,
-        0x2F, 0x42, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-        0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-        0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-        0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-        0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63
+    /* taken from Digital Video Processing for Engineers, Suhel Dhanani, Michael Parker */
+    constexpr std::array CHROMINANCE_QUANTIZATION_TABLE {
+        17, 18, 24, 47, 99, 99, 99, 99,
+        18, 21, 26, 66, 99, 99, 99, 99,
+        24, 26, 56, 99, 99, 99, 99, 99,
+        47, 66, 99, 99, 99, 99, 99, 99,
+        99, 99, 99, 99, 99, 99, 99, 99,
+        99, 99, 99, 99, 99, 99, 99, 99,
+        99, 99, 99, 99, 99, 99, 99, 99,
+        99, 99, 99, 99, 99, 99, 99, 99
     };
+
 }
 
 JFIF::JFIF(const std::string_view& folderPath, const std::string_view& fileName) {
@@ -62,7 +63,10 @@ JFIF::JFIF(const std::string_view& folderPath, const std::string_view& fileName)
     fileDescriptor = creat(filePathStr.c_str(),  O_CREAT | S_IRUSR | S_IWUSR);
 }
 
-int JFIF::encode(const uint32_t *pixels, const int width, const int height) const {
+void JFIF::print() const {
+}
+
+int JFIF::encode(const uint32_t *pixels, const int width, const int height, int comprQuality) const {
     if (fileDescriptor < 0) {
         std::cerr << "[ERROR] .jfif file could not be created!\n";
         return -1;
@@ -72,29 +76,16 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height) cons
         return -1;
     }
 
-    int status = writeMarker("SOI");
-    if (status < 0) return -1;
-
-    status = writeAPP0Header();
-    if (status < 0) return -1;
-
-    status = writeDQTMarker();
-    if (status < 0) return -1;
-
-    status = writeMarker("DHT");
-    if (status < 0) return -1;
-
-    status = writeMarker("SOS");
-    if (status < 0) return -1;
-
-    status = writeMarker("EOI");
-    if (status < 0) return -1;
+    if (writeMarker("SOI") < 0) return -1;
+    if (writeAPP0Header() < 0) return -1;
+    // if (writeCOMMarker() < 0) return -1;
+    if (writeDQTMarkers() < 0) return -1;
+    if (writeMarker("DHT") < 0) return -1;
+    if (writeMarker("SOS") < 0) return -1;
+    if (writeMarker("EOI") < 0) return -1;
 
     std::cout << "[ERROR] Successfully created the .jfif file!\n";
     return 0;
-}
-
-void JFIF::print() const {
 }
 
 int JFIF::writeMarker(const char* markerId) const {
@@ -112,32 +103,59 @@ int JFIF::writeAPP0Header() const {
     if (writeMarker("APP0") < 0)
         return -1;
 
-    std::string segmentData;
-    segmentData.append("JFIF\0", 5);    // Identifier
-    segmentData.append("\x01\x02", 2);  // Version major & minor
-    segmentData.append("\x00", 1);      // Units
-    segmentData.append("\x00\x00", 2);  // X density
-    segmentData.append("\x00\x00", 2);  // Y density
-    segmentData.append("\x00", 1);      // X thumbnail
-    segmentData.append("\x00", 1);      // Y thumbnail
-                                            // no Thumbnail
+    std::vector<uint8_t> segmentData;
+    segmentData.insert(segmentData.end(), {'J', 'F', 'I', 'F', '\0'}); // Identifier
+    segmentData.insert(segmentData.end(), {0x01, 0x02});               // Version major & minor
+    segmentData.push_back(0x00);                                                // Units
+    segmentData.insert(segmentData.end(), {0x00, 0x00});               // X density
+    segmentData.insert(segmentData.end(), {0x00, 0x00});               // Y density
+    segmentData.push_back(0x00);                                                // X thumbnail
+    segmentData.push_back(0x00);                                                // Y thumbnail
+                                                                                  // no Thumbnail
     return writeSegmentData(segmentData);
 }
 
-int JFIF::writeDQTMarker() const {
+int JFIF::writeDQTMarkers() const {
+    if (writeLuminanceDQTMarker() < 0) return -1;
+    if (writeChrominanceDQTMarker() < 0) return -1;
+    return 0;
+}
+
+int JFIF::writeCOMMarker() const {
+    if (writeMarker("COM") < 0)
+        return -1;
+
+    return writeSegmentData(std::vector<uint8_t>{
+        'T', 'H', 'I', 'S', ' ', 'I', 'S', ' ', 'A', ' ',
+        'J', 'P', 'E', 'G', ' ', 'F', 'I', 'L', 'E', ' ',
+        'G', 'E', 'N', 'E', 'R', 'A', 'T', 'E', 'D', ' ',
+        'B', 'Y', ' ', 'L', '7', 'A', 'U', 'R', '\0'
+    });
+}
+
+int JFIF::writeLuminanceDQTMarker() const {
     if (writeMarker("DQT") < 0)
         return -1;
 
-    std::string segmentData;
-    // add table identifier byte
-    for (const auto& i : LUMINANCE_QUANTIZATION_TABLE)
-        segmentData.append(std::to_string(i));
-    for (const auto& i : CHROMINANCE_QUANTIZATION_TABLE)
-        segmentData.append(std::to_string(i));
+    std::vector<uint8_t> segmentData;
+    segmentData.push_back(0b0000'0000);  // table identifier ' quantization values: 1 byte unsigned
+    for (const auto& i: LUMINANCE_QUANTIZATION_TABLE)
+        segmentData.push_back(static_cast<uint8_t>(i));
     return writeSegmentData(segmentData);
 }
 
-int JFIF::writeSegmentData(const std::string_view& segmentData) const {
+int JFIF::writeChrominanceDQTMarker() const {
+    if (writeMarker("DQT") < 0)
+        return -1;
+
+    std::vector<uint8_t> segmentData;
+    segmentData.push_back(0b0001'0000);  // table identifier ' quantization values: 1 byte unsigned
+    for (const auto& i: CHROMINANCE_QUANTIZATION_TABLE)
+        segmentData.push_back(static_cast<uint8_t>(i));
+    return writeSegmentData(segmentData);
+}
+
+int JFIF::writeSegmentData(const std::vector<uint8_t>& segmentData) const {
     static constexpr int MARKER_LENGTH_SIZE = 2;
     const uint16_t segmentSize = segmentData.size() + MARKER_LENGTH_SIZE;
     const uint8_t sizeBuffer[MARKER_LENGTH_SIZE] = { static_cast<uint8_t>((segmentSize >> 8) & 0xFF), static_cast<uint8_t>(segmentSize & 0xFF) };
