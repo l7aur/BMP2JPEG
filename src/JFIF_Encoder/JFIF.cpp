@@ -149,7 +149,7 @@ int JFIF::writeDHTSegment() const {
 
     std::vector<uint8_t> segmentData;
     segmentData.push_back(0b0000'0000); // table class ' table identifier
-    segmentData.insert(segmentData.end(), {}); //16-byte vector whose sum need to be used to fill the next of the segment
+    segmentData.insert(segmentData.end(), {}); // todo 16-byte vector whose sum need to be used to fill the next segment
 
     return writeSegmentData(segmentData);
 }
@@ -158,6 +158,13 @@ int JFIF::writeSOSSegment() const {
     if (writeMarker("SOS") < 0) return -1;
 
     std::vector<uint8_t> segmentData;
+    segmentData.push_back(0x03); // component count
+    segmentData.insert(segmentData.end(), {0x01, 0b0000'0000}); // component identifier, DC Huffman table ' AC Huffman table
+    segmentData.insert(segmentData.end(), {0x02, 0b0001'0001}); // component identifier, DC Huffman table ' AC Huffman table
+    segmentData.insert(segmentData.end(), {0x03, 0b0001'0001}); // component identifier, DC Huffman table ' AC Huffman table
+    segmentData.push_back(0x00); // spectral selection start
+    segmentData.push_back(0x3F); // spectral selection end
+    segmentData.push_back(0b0000'0000); // successive approximation
 
     return writeSegmentData(segmentData);
 }

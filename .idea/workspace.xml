@@ -29,10 +29,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added the SOF marker">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="renaming template for DHT and SOS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +185,7 @@
       <workItem from="1746451351323" duration="61000" />
       <workItem from="1746469999020" duration="678000" />
       <workItem from="1746609945427" duration="7023000" />
-      <workItem from="1746639405525" duration="5214000" />
+      <workItem from="1746639405525" duration="6476000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -404,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746644457998</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="renaming template for DHT and SOS">
+      <option name="closed" value="true" />
+      <created>1746646660401</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1746646660401</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,7 +458,8 @@
     <MESSAGE value="added book + started working on dqt" />
     <MESSAGE value="added quantization tables, cleaned-up code, refactored" />
     <MESSAGE value="added the SOF marker" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the SOF marker" />
+    <MESSAGE value="renaming template for DHT and SOS" />
+    <option name="LAST_COMMIT_MESSAGE" value="renaming template for DHT and SOS" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
