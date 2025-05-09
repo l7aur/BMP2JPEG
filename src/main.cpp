@@ -5,7 +5,7 @@
 #include "Util/FreeFunctions.h"
 
 int main(int argc, char *argv[]) {
-    constexpr char BMP_FILE_PATH[] = "Resources/flowers_24bits.bmp";
+    constexpr char BMP_FILE_PATH[] = "Resources/cameraman.bmp";
     constexpr int jpegCompressionQuality = 90;
 
     BMP bmpImg(BMP_FILE_PATH);
@@ -34,6 +34,6 @@ int main(int argc, char *argv[]) {
     }
 
     // debug
-    // Util::renderPixels(pxd, bmpImg.getWidth(), bmpImg.getHeight());
+    Util::renderPixels(pxd, bmpImg.getWidth(), bmpImg.getHeight());
     return 0;
 }

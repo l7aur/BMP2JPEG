@@ -5,12 +5,22 @@
 #include <unistd.h>
 #include <map>
 #include <array>
+#include <cassert>
 
 #include "../Util/FreeFunctions.h"
+#include "../Util/Mat8x8.h"
 
 typedef uint16_t marker;
+
+struct ProcessedPixelsType {
+    std::vector<uint8_t> yValue;
+    std::vector<uint8_t> cbValue;
+    std::vector<uint8_t> crValue;
+};
+
 namespace {
     constexpr unsigned int MARKER_SIZE_BYTES{ 2 };
+    constexpr unsigned int QUANTIZATION_COMPRESSION{ 2 };
 
     const std::map<const std::string, const marker> MARKERS {
                 {"TEM", 0x01'FF},
@@ -54,7 +64,6 @@ namespace {
         99, 99, 99, 99, 99, 99, 99, 99,
         99, 99, 99, 99, 99, 99, 99, 99
     };
-
 }
 
 JFIF::JFIF(const std::string_view& folderPath, const std::string_view& fileName) {
@@ -68,7 +77,7 @@ JFIF::JFIF(const std::string_view& folderPath, const std::string_view& fileName)
 void JFIF::print() const {
 }
 
-int JFIF::encode(const uint32_t *pixels, const int width, const int height, int comprQuality) const {
+int JFIF::encode(const uint32_t *pixels, const int width, const int height, const int comprQuality) const {
     if (fileDescriptor < 0) {
         std::cerr << "[ERROR] .jfif file could not be created!\n";
         return -1;
@@ -78,6 +87,55 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, int 
         return -1;
     }
 
+    const ProcessedPixelsType newPixels = processPixels(pixels, width, height);
+    if (writeJFIFFile(newPixels, width, height) < 0) {
+        std::cout << "[Error] Unable to create the .jfif file!\n";
+        return -1;
+    }
+    std::cout << "[INFO] Successfully created the .jfif file!\n";
+    return 0;
+}
+
+[[nodiscard]] ProcessedPixelsType JFIF::processPixels(const uint32_t *pixels, const int width, const int height) const {
+    ProcessedPixelsType processedPixels{};
+    assert(Util::isPowerOf2(width));
+    assert(Util::isPowerOf2(height));
+    for (int i = 0; i < width * height; i++) {
+        Util::Pixel4 pix4 = Util::rgbToYCrCb(pix4);
+        processedPixels.yValue.push_back(pix4.y);
+        if (i % (QUANTIZATION_COMPRESSION * 2) == 0) { // remove 3/4 of the data - quantization
+            processedPixels.cbValue.push_back(pix4.cb);
+            processedPixels.crValue.push_back(pix4.cr);
+        }
+    }
+    applyDCT(processedPixels.yValue, width, height);
+    applyDCT(processedPixels.cbValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION);
+    applyDCT(processedPixels.crValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION);
+    return processedPixels;
+}
+
+void JFIF::applyDCT(std::vector<uint8_t> &comp, const unsigned int width, const unsigned int height) const {
+    for (int i = 0; i < height; i += 8) {
+        for (int j = 0; j < width; j += 8) {
+            std::array<std::array<double, 8>, 8> block{};
+            std::array<unsigned int, 64> blockIndices{};
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    block[x][y] = comp.at((i + x) * width + (j + y));
+                    blockIndices[x * 8 + y] = (i + x) * width + (j + y);
+                }
+            }
+            Util::Mat8x8 m{block};
+            Util::Mat8x8 dctOutput = Util::Mat8x8::dctMat() * m * Util::Mat8x8::dctMat().transpose();
+
+            for (int x = 0; x < 8; x++)
+                for (int y = 0; y < 8; y++)
+                    comp.at((i + x) * width + (j + y)) = static_cast<uint8_t>(dctOutput.at(x, y));
+        }
+    }
+}
+
+int JFIF::writeJFIFFile(const ProcessedPixelsType& pixels, const int width, const int height) const {
     if (writeMarker("SOI") < 0) return -1;
     if (writeAPP0Segment() < 0) return -1;
     // if (writeCOMMarker() < 0) return -1;
@@ -86,8 +144,6 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, int 
     if (writeDHTSegment() < 0) return -1;
     if (writeSOSSegment() < 0) return -1;
     if (writeMarker("EOI") < 0) return -1;
-
-    std::cout << "[ERROR] Successfully created the .jfif file!\n";
     return 0;
 }
 

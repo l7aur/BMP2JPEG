@@ -3,6 +3,11 @@
 #include <string>
 #include <vector>
 
+namespace Util {
+    struct Pixel4;
+}
+struct ProcessedPixelsType;
+
 class JFIF {
 public:
     explicit JFIF(const std::string_view& folderPath, const std::string_view& fileName);
@@ -15,8 +20,12 @@ public:
 private:
     int fileDescriptor{-1};
 
-    [[nodiscard]] int writeMarker(const char* markerId) const;
 
+    [[nodiscard]] ProcessedPixelsType processPixels(const uint32_t *pixels, int width, int height) const;
+    void applyDCT(std::vector<uint8_t> &comp, unsigned int width, unsigned int height) const;
+
+    [[nodiscard]] int writeJFIFFile(const ProcessedPixelsType& pixels, int width, int height) const;
+    [[nodiscard]] int writeMarker(const char* markerId) const;
     [[nodiscard]] int writeAPP0Segment() const;
     [[nodiscard]] int writeDQTSegments() const;
     [[nodiscard]] int writeSOFSegment(int width, int height) const;

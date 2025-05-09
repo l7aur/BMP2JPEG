@@ -58,7 +58,6 @@ namespace Util {
     {
         if (pixels == nullptr) {
             std::cerr << "[ERROR] Unable to render anything, pixel pointer points to nothing!\n";
-            delete[] pixels;
             return -1;
         }
         textureWidth = imageWidth;
@@ -72,15 +71,12 @@ namespace Util {
         if (!texture) {
             std::cerr << "[ERROR] Unable to create texture!\n";
             std::cerr << SDL_GetError() << '\n';
-            delete[] pixels;
             return -1;
         }
         if (SDL_UpdateTexture(texture, nullptr, pixels, imageWidth * static_cast<int>(sizeof(uint32_t))) < 0) {
             std::cerr << "[ERROR] Unable to update texture!\n";
-            delete[] pixels;
             return -1;
         }
-        delete[] pixels;
         return 0;
     }
 
