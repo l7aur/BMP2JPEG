@@ -108,13 +108,13 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, cons
             processedPixels.crValue.push_back(pix4.cr);
         }
     }
-    applyDCT(processedPixels.yValue, width, height);
-    applyDCT(processedPixels.cbValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION);
-    applyDCT(processedPixels.crValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION);
+    applyDCT(processedPixels.yValue, width, height, LUMINANCE_QUANTIZATION_TABLE);
+    applyDCT(processedPixels.cbValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION, CHROMINANCE_QUANTIZATION_TABLE);
+    applyDCT(processedPixels.crValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION, CHROMINANCE_QUANTIZATION_TABLE);
     return processedPixels;
 }
 
-void JFIF::applyDCT(std::vector<uint8_t> &comp, const unsigned int width, const unsigned int height) const {
+void JFIF::applyDCT(std::vector<uint8_t> &comp, const unsigned int width, const unsigned int height, const std::array<int, 64> &TABLE) {
     for (int i = 0; i < height; i += 8) {
         for (int j = 0; j < width; j += 8) {
             std::array<std::array<double, 8>, 8> block{};
@@ -130,7 +130,9 @@ void JFIF::applyDCT(std::vector<uint8_t> &comp, const unsigned int width, const 
 
             for (int x = 0; x < 8; x++)
                 for (int y = 0; y < 8; y++)
-                    comp.at((i + x) * width + (j + y)) = static_cast<uint8_t>(dctOutput.at(x, y));
+                    comp.at((i + x) * width + (j + y)) = static_cast<uint8_t>(dctOutput.at(x, y) / TABLE[x * 8 + y]);
+
+            //todo rle?
         }
     }
 }

@@ -20,9 +20,8 @@ public:
 private:
     int fileDescriptor{-1};
 
-
     [[nodiscard]] ProcessedPixelsType processPixels(const uint32_t *pixels, int width, int height) const;
-    void applyDCT(std::vector<uint8_t> &comp, unsigned int width, unsigned int height) const;
+    static void applyDCT(std::vector<uint8_t> &comp, unsigned int width, unsigned int height, const std::array<int, 64> &TABLE) ;
 
     [[nodiscard]] int writeJFIFFile(const ProcessedPixelsType& pixels, int width, int height) const;
     [[nodiscard]] int writeMarker(const char* markerId) const;

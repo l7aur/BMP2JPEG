@@ -15,6 +15,7 @@ public:
     [[nodiscard]] double at(int row, int col) const;
     [[nodiscard]] Mat8x8 transpose() const;
     Mat8x8 operator*(const Mat8x8 &other) const;
+
 private:
     std::array<std::array<double, 8>, 8> data{};
 };

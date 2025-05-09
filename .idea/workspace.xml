@@ -29,15 +29,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="refactored some code, renaming">
-      <change afterPath="$PROJECT_DIR$/src/Util/Mat8x8.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Util/Mat8x8.h" afterDir="false" />
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added the discrete cosine transform">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/ImageRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ImageRenderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/Mat8x8.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Mat8x8.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +260,7 @@
       <workItem from="1746469999020" duration="678000" />
       <workItem from="1746609945427" duration="7023000" />
       <workItem from="1746639405525" duration="7575000" />
-      <workItem from="1746769460152" duration="12414000" />
+      <workItem from="1746769460152" duration="13172000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -505,7 +502,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746648755547</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="added the discrete cosine transform">
+      <option name="closed" value="true" />
+      <created>1746782314641</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1746782314641</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +533,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="idk" />
     <MESSAGE value="added Util namespace&#10;refactored code&#10;texture updates" />
     <MESSAGE value="fixed texture" />
     <MESSAGE value="started doc" />
@@ -553,7 +557,19 @@
     <MESSAGE value="renaming template for DHT and SOS" />
     <MESSAGE value="finished SOS marker" />
     <MESSAGE value="refactored some code, renaming" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored some code, renaming" />
+    <MESSAGE value="added the discrete cosine transform" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the discrete cosine transform" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp</url>
+          <line>113</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
