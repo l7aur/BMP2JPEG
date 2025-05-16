@@ -5,7 +5,7 @@
 #include "Util/FreeFunctions.h"
 
 int main(int argc, char *argv[]) {
-    constexpr char BMP_FILE_PATH[] = "Resources/cameraman.bmp";
+    constexpr char BMP_FILE_PATH[] = "Resources/Converted/correctBMP.bmp";
     constexpr int jpegCompressionQuality = 90;
 
     BMP bmpImg(BMP_FILE_PATH);

@@ -44,27 +44,19 @@ namespace {
 
     /* taken from Digital Video Processing for Engineers, Suhel Dhanani, Michael Parker */
     constexpr std::array LUMINANCE_QUANTIZATION_TABLE {
-        16, 11, 10, 16, 24, 40, 51, 61,
-        12, 12, 14, 19, 26, 58, 60, 55,
-        14, 13, 16, 24, 40, 57, 69, 56,
-        14, 17, 22, 29, 51, 87, 80, 62,
-        18, 22, 37, 56, 68, 109, 103, 77,
-        24, 35, 55, 64, 81, 104, 113, 92,
-        49, 64, 78, 87, 103, 121, 120, 101,
-        72, 92, 95, 98, 112, 100, 103, 99
-    };
+        0x08, 0x06, 0x06, 0x07, 0x06, 0x05, 0x08,
+        0x07, 0x07, 0x07, 0x09, 0x09, 0x08, 0x0a, 0x0c, 0x14, 0x0d, 0x0c, 0x0b, 0x0b, 0x0c, 0x19, 0x12,
+        0x13, 0x0f, 0x14, 0x1d, 0x1a, 0x1f, 0x1e, 0x1d, 0x1a, 0x1c, 0x1c, 0x20, 0x24, 0x2e, 0x27, 0x20,
+        0x22, 0x2c, 0x23, 0x1c, 0x1c, 0x28, 0x37, 0x29, 0x2c, 0x30, 0x31, 0x34, 0x34, 0x34, 0x1f, 0x27,
+        0x39, 0x3d, 0x38, 0x32, 0x3c, 0x2e, 0x33, 0x34, 0x32 };
 
     /* taken from Digital Video Processing for Engineers, Suhel Dhanani, Michael Parker */
     constexpr std::array CHROMINANCE_QUANTIZATION_TABLE {
-        17, 18, 24, 47, 99, 99, 99, 99,
-        18, 21, 26, 66, 99, 99, 99, 99,
-        24, 26, 56, 99, 99, 99, 99, 99,
-        47, 66, 99, 99, 99, 99, 99, 99,
-        99, 99, 99, 99, 99, 99, 99, 99,
-        99, 99, 99, 99, 99, 99, 99, 99,
-        99, 99, 99, 99, 99, 99, 99, 99,
-        99, 99, 99, 99, 99, 99, 99, 99
-    };
+        0x09, 0x09,
+        0x09, 0x0c, 0x0b, 0x0c, 0x18, 0x0d, 0x0d, 0x18, 0x32, 0x21, 0x1c, 0x21, 0x32, 0x32, 0x32, 0x32,
+        0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32,
+        0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32,
+        0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32 };
 
     ProcessedPixelsType downSample(const std::vector<Util::Pixel4>& rawPixels) {
         ProcessedPixelsType processedPixels{};
@@ -101,8 +93,7 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, cons
         return -1;
     }
 
-    const ProcessedPixelsType newPixels = processPixels(pixels, width, height);
-    if (writeJFIFFile(newPixels, width, height) < 0) {
+    if (writeJFIFFile(pixels, width, height) < 0) {
         std::cout << "[Error] Unable to create the .jfif file!\n";
         return -1;
     }
@@ -110,22 +101,21 @@ int JFIF::encode(const uint32_t *pixels, const int width, const int height, cons
     return 0;
 }
 
-[[nodiscard]] ProcessedPixelsType JFIF::processPixels(const uint32_t *pixels, const int width, const int height) const {
+[[nodiscard]] ProcessedPixelsType JFIF::processPixels(const uint32_t *pixels, const int width, const int height) {
     assert(Util::isPowerOf2(width));
     assert(Util::isPowerOf2(height));
     const std::vector<Util::Pixel4> rawPixels = Util::convertToPixelArray(pixels, width, height);
 
     ProcessedPixelsType processedPixels = downSample(rawPixels);
 
-    applyDCTandQuantization(processedPixels.yValue, width, height, LUMINANCE_QUANTIZATION_TABLE);
-    applyDCTandQuantization(processedPixels.cbValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION, CHROMINANCE_QUANTIZATION_TABLE);
-    applyDCTandQuantization(processedPixels.crValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION, CHROMINANCE_QUANTIZATION_TABLE);
-
+    applyDCTAndQuantization(processedPixels.yValue, width, height, LUMINANCE_QUANTIZATION_TABLE);
+    applyDCTAndQuantization(processedPixels.cbValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION, CHROMINANCE_QUANTIZATION_TABLE);
+    applyDCTAndQuantization(processedPixels.crValue, width / QUANTIZATION_COMPRESSION, height / QUANTIZATION_COMPRESSION, CHROMINANCE_QUANTIZATION_TABLE);
 
     return processedPixels;
 }
 
-void JFIF::applyDCTandQuantization(std::vector<int> &comp, const unsigned int width, const unsigned int height, const std::array<int, 64> &TABLE) {
+void JFIF::applyDCTAndQuantization(std::vector<int> &comp, const unsigned int width, const unsigned int height, const std::array<int, 64> &TABLE) {
     for (int i = 0; i < height; i += BLOCK_SIZE) {
         for (int j = 0; j < width; j += BLOCK_SIZE) {
             std::array<std::array<double, BLOCK_SIZE>, BLOCK_SIZE> block{};
@@ -147,14 +137,15 @@ void JFIF::applyDCTandQuantization(std::vector<int> &comp, const unsigned int wi
     }
 }
 
-int JFIF::writeJFIFFile(const ProcessedPixelsType& pixels, const int width, const int height) const {
+int JFIF::writeJFIFFile(const uint32_t* pixels, const int width, const int height) const {
     if (writeMarker("SOI") < 0) return -1;
     if (writeAPP0Segment() < 0) return -1;
-    if (writeCOMMarker() < 0) return -1;
+    // if (writeCOMMarker() < 0) return -1;
     if (writeDQTSegments() < 0) return -1;
     if (writeSOFSegment(width, height) < 0) return -1;
     if (writeDHTSegments() < 0) return -1;
     if (writeSOSSegment() < 0) return -1;
+    if (writeCompressedPixelData(pixels, width, height) < 0) return -1;
     if (writeMarker("EOI") < 0) return -1;
     return 0;
 }
@@ -176,10 +167,10 @@ int JFIF::writeAPP0Segment() const {
 
     std::vector<uint8_t> segmentData;
     segmentData.insert(segmentData.end(), {'J', 'F', 'I', 'F', '\0'}); // Identifier
-    segmentData.insert(segmentData.end(), {0x01, 0x02});               // Version major & minor
-    segmentData.push_back(0x00);                                                // Units
-    segmentData.insert(segmentData.end(), {0x00, 0x00});               // X density
-    segmentData.insert(segmentData.end(), {0x00, 0x00});               // Y density
+    segmentData.insert(segmentData.end(), {0x01, 0x01});               // Version major & minor
+    segmentData.push_back(0x01);                                                // Units
+    segmentData.insert(segmentData.end(), {0x00, 0x60});               // X density
+    segmentData.insert(segmentData.end(), {0x00, 0x60});               // Y density
     segmentData.push_back(0x00);                                                // X thumbnail
     segmentData.push_back(0x00);                                                // Y thumbnail
                                                                                   // no Thumbnail
@@ -198,8 +189,8 @@ int JFIF::writeSOFSegment(const int width, const int height) const {
     std::vector<uint8_t> segmentData;
     segmentData.push_back(0x08); // 8-bit precision
 
-    std::vector byteHeight = Util::convertIntToTwoByte(height);
-    std::vector byteWidth = Util::convertIntToTwoByte(width);
+    std::vector byteHeight = Util::convertIntToTwoBytes(height);
+    std::vector byteWidth = Util::convertIntToTwoBytes(width);
     segmentData.insert(segmentData.end(), byteHeight.begin(), byteHeight.end()); // image height
     segmentData.insert(segmentData.end(), byteWidth.begin(), byteWidth.end()); // image width
 
@@ -288,6 +279,23 @@ int JFIF::writeSOSSegment() const {
     return writeSegmentData(segmentData);
 }
 
+int JFIF::writeCompressedPixelData(const uint32_t *pixels, const int width, const int height) const {
+    const ProcessedPixelsType processedPixels = processPixels(pixels, width, height);
+    const std::vector<uint8_t> buffer {
+        0xc5, 0x95, 0x8a, 0xc2, 0xec, 0x38, 0x21,
+        0x49, 0x14, 0xdb, 0x67, 0x69, 0x2d, 0xd5, 0x98, 0xe5, 0x8e,
+        0x72, 0x7f, 0x1a, 0xaf, 0x7d, 0x1a, 0x24, 0x0a,
+        0x55, 0x15, 0x4e, 0xee, 0xa0, 0x63, 0xb1, 0xab,
+        0x3e, 0x44, 0x5f, 0xf3, 0xc9, 0x3f, 0xef, 0x91,
+        0x5f, 0x65, 0x0a, 0xb8, 0x8a, 0x98, 0xf9, 0xa4,
+        0x95, 0xa1, 0x14, 0xad, 0xcc, 0xec, 0xdc, 0x9d,
+        0xd3, 0xdb, 0x75, 0x6b, 0x6d, 0xd4, 0xfd, 0x8d,
+        0xa4, 0xa2, 0x7f};
+    if (write(fileDescriptor, buffer.data(), buffer.size()) < 0)
+        return -1;
+    return 0;
+}
+
 int JFIF::writeCOMMarker() const {
     if (writeMarker("COM") < 0)
         return -1;
@@ -316,7 +324,7 @@ int JFIF::writeChrominanceDQTMarker() const {
         return -1;
 
     std::vector<uint8_t> segmentData;
-    segmentData.push_back(0b0001'0000);  // table identifier ' quantization values: 1 byte unsigned
+    segmentData.push_back(0b0000'0001);  // table identifier ' quantization values: 1 byte unsigned
     for (const auto& i: CHROMINANCE_QUANTIZATION_TABLE)
         segmentData.push_back(static_cast<uint8_t>(i));
     return writeSegmentData(segmentData);
