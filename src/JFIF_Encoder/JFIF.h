@@ -37,6 +37,7 @@ private:
     [[nodiscard]] int writeChrominanceDQTMarker() const;
 
     [[nodiscard]] int writeSegmentData(const std::vector<uint8_t>& segmentData) const;
+    [[nodiscard]] int writeSegmentData(const uint8_t* segmentData, size_t n) const;
 
     void cleanup() const;
 };

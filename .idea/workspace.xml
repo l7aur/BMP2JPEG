@@ -29,11 +29,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="added dhts">
+    <list default="true" id="c64451c9-868b-4300-8fd1-2b6e6dbb72ba" name="Changes" comment="hardcoded version ok">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFIF_Encoder/JFIF.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +80,8 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/BMP.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/BMP.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BMP_Decoder/ColorTable.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -111,7 +112,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "CMake Application.BMP2JPEG.executor": "Run",
+    "CMake Application.BMP2JPEG.executor": "Debug",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -186,7 +187,7 @@
       <workItem from="1746769460152" duration="14437000" />
       <workItem from="1747126734245" duration="231000" />
       <workItem from="1747128291136" duration="14000" />
-      <workItem from="1747383251516" duration="15144000" />
+      <workItem from="1747383251516" duration="17180000" />
     </task>
     <task id="LOCAL-00001" summary="test2">
       <option name="closed" value="true" />
@@ -452,7 +453,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747407839215</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="hardcoded version ok">
+      <option name="closed" value="true" />
+      <created>1747412455717</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1747412455717</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,7 +484,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="started doc" />
     <MESSAGE value="fixed sdl texture" />
     <MESSAGE value="update doc" />
     <MESSAGE value="refactored project structure" />
@@ -500,18 +508,8 @@
     <MESSAGE value="added the discrete cosine transform" />
     <MESSAGE value="added quantization of dct output values" />
     <MESSAGE value="added dhts" />
-    <option name="LAST_COMMIT_MESSAGE" value="added dhts" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/JFIF_Encoder/JFIF.cpp</url>
-          <line>196</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="hardcoded version ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="hardcoded version ok" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
