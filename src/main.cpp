@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
     }
 
     // debug
-    Util::renderPixels(pxd, bmpImg.getWidth(), bmpImg.getHeight());
+    // Util::renderPixels(pxd, bmpImg.getWidth(), bmpImg.getHeight());
+    delete[] pxd;
     return 0;
 }

@@ -125,3 +125,4 @@ For all practical purposes a JPEG file means a JPEG file in JFIF format.
 10. https://www.sciencedirect.com/topics/computer-science/quantization-table
 11. https://www.sciencedirect.com/book/9780124157606/digital-video-processing-for-engineers
 12. https://cgjennings.ca/articles/jpeg-compression/
+13. https://www.thewebmaster.com/jpeg-definitive-guide/
