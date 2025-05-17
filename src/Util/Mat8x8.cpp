@@ -9,7 +9,7 @@ namespace Util {
     Mat8x8::Mat8x8() {
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
-                data[i][j] = 0;
+                data[i][j] = 0.0;
     }
 
     double Mat8x8::at(const int row, const int col) const {

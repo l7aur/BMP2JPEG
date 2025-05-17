@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     status = jfif.encode(pxd, bmpImg.getWidth(), bmpImg.getHeight(), jpegCompressionQuality);
     if (status < 0) {
-        std::cerr << "[ERROR] Image could not be converted to .jfif\n";
+        std::cerr << "[ERROR] Image could not be converted to .jpg\n";
         return -1;
     }
 

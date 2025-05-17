@@ -13,8 +13,6 @@ public:
     explicit JFIF(const std::string_view& folderPath, const std::string_view& fileName);
     ~JFIF() { cleanup(); }
 
-    void print() const;
-
     [[nodiscard]]int encode(const uint32_t *pixels, int width, int height, int comprQuality) const;
 
 private:
@@ -35,6 +33,8 @@ private:
 
     [[nodiscard]] int writeLuminanceDQTMarker() const;
     [[nodiscard]] int writeChrominanceDQTMarker() const;
+
+    static void reorder(const std::vector<int>& comp, unsigned int width, unsigned int height);
 
     [[nodiscard]] int writeSegmentData(const std::vector<uint8_t>& segmentData) const;
     [[nodiscard]] int writeSegmentData(const uint8_t* segmentData, size_t n) const;
