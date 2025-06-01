@@ -4,14 +4,16 @@
 #include "JFIF_Encoder/JFIF.h"
 #include "Util/FreeFunctions.h"
 
-int main(int argc, char *argv[]) {
-    constexpr char BMP_FILE_PATH[] = "Resources/Converted/correctBMP.bmp";
-    constexpr int jpegCompressionQuality = 90;
+int main(const int argc, char *argv[]) {
+    if (argc != 3 && argc != 4) {
+        std::cerr << "Usage: " << argv[0] << " <input_filepath> <output_filepath> <optional --verbose>" << std::endl;
+        return EXIT_FAILURE;
+    }
 
-    BMP bmpImg(BMP_FILE_PATH);
+    BMP bmpImg(argv[1]);
     int status = bmpImg.isOpen();
     if (status < 0) {
-        std::cerr << "[ERROR] File \'" << BMP_FILE_PATH << "\' could not be opened!\n";
+        std::cerr << "[ERROR] File \'" << argv[1] << "\' could not be opened!\n";
         return -1;
     }
 
@@ -21,12 +23,14 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    // bmpImg.print();
+    if (argc == 4 && strcmp(argv[3], "--verbose") == 0)
+        bmpImg.print();
 
     const uint32_t * pxd = bmpImg.getPixelData();
 
-    const JFIF jfif{"./Resources/Converted/", "result"};
+    const JFIF jfif{argv[2], "result"};
 
+    constexpr int jpegCompressionQuality = 90;
     status = jfif.encode(pxd, bmpImg.getWidth(), bmpImg.getHeight(), jpegCompressionQuality);
     if (status < 0) {
         std::cerr << "[ERROR] Image could not be converted to .jpg\n";

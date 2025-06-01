@@ -32,4 +32,11 @@ namespace Util {
                     result.data[i][j] += data[i][k] * other.data[k][j];
         return result;
     }
+
+    std::ostream & operator<<(std::ostream &os, const Mat8x8 &mat) {
+        for (int i = 0; i < 8; i++, std::cout << std::endl)
+            for (int j = 0; j < 8; j++)
+                os << mat.data[i][j] << " ";
+        return os;
+    }
 }

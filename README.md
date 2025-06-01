@@ -1,115 +1,104 @@
 # Converting BMP files into JPEG
 
-Project for image processing course
+_not finished_
 
-## The BMP format
+## **Understanding the Formats**
 
-The BMP file format is a raster graphics image file format used to store bitmap digital images independent of the display device. It is capable of storing bidimensional images in various color depths, and optionally, with data compression, alpha channel and color profile.
+**BMP** (Bitmap): BMP is an uncompressed or minimally compressed image format. It stores raw pixel data, meaning each pixel's color information (typically RGB) is directly represented. This results in large file sizes but perfect fidelity to the original image.
+**JPEG** (Joint Photographic Experts Group): JPEG is a lossy compression format primarily designed for photographic images. It achieves high compression ratios by discarding some visual information that is less perceptible to the human eye. This makes JPEG files significantly smaller than BMP files, but the compression is irreversible.
 
-### BMP file structure
+## **Overview of the Conversion Process**
 
-1. **header**: 14 bytes
-- signature: 2 bytes - "BM"
-- file size: 4 bytes (size of file in bytes)
-- reserved: 4 bytes (when 0 -> unused)
-- data offset: 4 bytes (file offset to raster data)
+The conversion from BMP to JPEG can be broadly summarized by these steps:
+- **Read BMP Data**: Extract pixel data and image dimensions.
+- **Color Space Conversion**: Transform RGB pixel data to YCbCr.
+- **Chroma Subsampling**: Reduce the resolution of color information (Cb, Cr).
+- **Discrete Cosine Transform (DCT)**: Convert spatial pixel data into frequency components.
+- **Quantization**: Reduce the precision of frequency components, introducing loss.
+- **Zig-zag Scan**: Reorder quantized coefficients for efficient compression.
+- **Run-Length Encoding (RLE)**: Compress sequences of zeros.
+- **Huffman Coding**: Apply variable-length codes for further compression.
+- **JPEG File Structure**: Assemble the compressed data with headers and tables.
 
-2. **(DIB) info header**: 12 to 124 bytes depending on the version*
-- size (of info header)
-- width (of image)
-- height (of image)
-- planes ( = 1)
-- bit count (bits per pixel)
-    - 1 = monochrome palette => number of colors = 1
-    - 4 = 4-bit palette => number of colors = 16
-    - 8 = 8-bit palette => number of colors = 256
-    - 16 = 16-bit RGB => number of colors = 65536
-    - 24 = 24-bit RGB => number of colors = 16M
-- compression
-    - 0 = BI_RGB => no compression
-    - 1 = BI_RLE8 => 8-bit RLE encoding
-    - 2 = BI_RLE4 => 4-bit RLE encoding
-- image size
-- X pixels per meter
-- Y pixels per meter
-- used colors
-- important colors
-- color table (only if bit count <= 8)
-    - red
-    - green
-    - blue
-    - reserved (0 = unused)
-- ...
+## **Detailed Conversion Steps**
 
-3. **raster data**
-
-*) There are 7 possible versions: BITMAPCOREHEADER / OS21XBITMAPHEADER (12 bytes), OS22XBITMAPHEADER (2 types - 64 and 16 bytes), BITMAPINFOHEADER (40 bytes), BITMAPV2INFOHEADER (52 bytes), BITMAPV3INFOHEADER (56 bytes), BITMAPV4HEADER (108 bytes), BITMAPV5HEADER (124 bytes).
-
-## The JPEG format
-
-JPEG is an acronym that stands for Joint Photographic Experts Group and is the most used format for storing photographic images. It gives the greatest compression of any bitmap format in common use (a 1 MB .bmp can take up to 50 KB with .jpeg). Converting to JPEG is a computationally-intensive process, but its outstanding compression generally outweighs the required processing. All JPEG compression methods are lossy, meaning that the format is unsuitable for intermediate storage format or when an image is edited repeatedly. Moreover, JPEG generally performs worse at compressing text than at compressing photographs.
-The original standard defines 4 compression modes:
-
-### Intro:
-
-A _scan_ is a block of compressed data that represents a single pass through the image for one (non-interleaved - one row at a time, top down, left right; an MCU is one data unit) or more components (interleaved - encoded as groups of data known as minimum coded units, a component's vertical sampling frequency specifies the number of data row units and its horizontal frequency gives the number of columns; components are not interleaved within an MCU). Scans are always encoded with complete MCUs. If the height or the width is not a multiple of the MCU size, padding pixels are added so that the compressed data always contains complete MCUs.
-
-_Sampling frequency_ is the relative frequency a component is sampled at. The more frequently samples are taken, the better the approximation of the original image.
-
-1. **sequential**
-
-    The plain vanilla JPEG mode. Encoding is done top to bottom. It supports 8 and 12-bit precision sample data. Each color component is encoded in a single *scan*. Each pass through the image is stored in a distinct data block called *scan*, while in most of the other formats the compressed pixel data is stored in one contiguous region in the file.
+### **Reading BMP Data** 
    
-    Two entropy encoding processes are defined: Huffman encoding and arithmetic encoding. *Most JPEGs use sequential compression with Huffman encoding and 8-bit sample data*. A particular case of the Huffman encoding process in JPEGs is the *baseline process*. Baseline images can have only 8-bit samples and are restricted to fewer Huffman and quantization tables than extended sequential images.
+The first step is to parse the BMP file. This involves: Reading the BMP header to get information like file size, image width, height, and pixel depth. Extracting the raw pixel data, which is typically stored in a BGR (Blue, Green, Red) order for each pixel.
 
-2. **progressive**
-  
-    Images are encoded in multiple scans. The compressed data for each component is placed in a minimum of 2 and as many as 896 scans (usually a number closer to the lower bound). Initial scans create a rough version of the image while subsequent scans refine it. Progressive images are intended for viewing as they are decoded. They prove useful when an image is being downloaded over a network because users get an idea of what the image contains while as little data as possible is transmitted (low cost rejection in terms of network usage).
-
-    The main drawbacks of this compression mode is that it requires much more processing than the sequential kind. Moreover, the size of a progressive-mode image is similar to the size of a sequential-mode image. It proves useful when the transmission speed is exceeded by the processing power. All in all, it is rarely used.
-
-3. **hierarchical**
+### **Color Space Conversion (RGB to YCbCr)**
    
-    It is a super-progressive mode in which images are broken into sub-images called *frames*. If only a low resolution of an image is desired, not all of the frames are required to get the desired result. It may be a better mode than progressive when low transmission rates are used. Requires a lot of additional processing and takes up more space.
-   
-    A really rare sight in terms of JPEGs.
+JPEG compression works more efficiently in the YCbCr color space than in RGB. 
+- **Y** (Luminance): Represents the brightness or intensity of the pixel. The human eye is most sensitive to changes in luminance. 
+- **Cb** (Chroma Blue): Represents the blue-yellow difference. 
+- **Cr** (Chroma Red):S Represents the red-green difference.
+Each RGB pixel is converted to a YCbCr triplet using specific mathematical formulas. The Y, Cb, and Cr values are typically shifted so they are centered around 0 (e.g., Y from 0-255, Cb/Cr from -128 to 127 or 0-255 with an offset).
 
-4. **lossless**
-  
-    The original "lossless" JPEG format. Deprecated because it was worse than other lossless formats. It has been replaced by JPEG-LS.
+<img src="README_resources/img_10.png" alt="The YCbCr decomposition" style="display: block; margin: 0 auto;">
 
-The JPEG standard does not define any kind of file format. This void has been filled up by Eric Hamilton's JFIF (JPEG File Interchange Format). Since it has been published JFIF has become synonymous with "JPEG File". Any .jpg or .jpeg file complies with the JFIF format. TIFF files use JPEG compression as well.    
+### **Chroma Subsampling**
 
-### Details
+This is a key step where loss is introduced. The human eye is less sensitive to fine details in color than in brightness. Therefore, JPEG often reduces the resolution of the Cb and Cr components. Common subsampling ratios include:
+- **No subsampling**: All components retain full resolution. 
+- Cb and Cr are sampled horizontally at half the rate of Y.
+- Cb and Cr are sampled both horizontally and vertically at half the rate of Y. This means for every 4 Y pixels, there is only 1 Cb and 1 Cr sample. 
 
-Integers are stored in the big endian format, bit strings are stored from the most significant to the least significant
+This step significantly reduces the amount of color data to be processed, contributing heavily to compression.
 
-In most graphics file formats, all the color components are sampled at the same frequency. JPEG allows individual components to be sampled at different frequencies. Sampling frequencies allow images to be compressed while varying the amount of information contributed by each component.
+### **Discrete Cosine Transform (DCT)**
 
-The steps of JPEG encoding:
+After color space conversion and subsampling, each Y, Cb, and Cr component is divided into non-overlapping 8x8 pixel blocks. The DCT is then applied to each of these 8x8 blocks. The DCT transforms the pixel data from the spatial domain (pixel values) to the frequency domain (frequency coefficients).  The top-left coefficient (0,0) is the DC coefficient, representing the average value (or overall intensity) of the 8x8 block.  The remaining 63 coefficients are AC coefficients, representing higher frequency variations (details, textures, edges) within the block.
+<img src="README_resources/img_7.png" alt="The DCT matrix" style="display: block; margin: 0 auto;">
 
-1. **sampling**: convert pixel data from native color space to YCbCr and perform down sampling 
-2. **discrete cosine transform**: convert data units (8 x 8 pixel blocks) values into a sum of cosine functions 
-3. **quantization**: remove discrete cosine transform coefficients that are not essential for recreating a close approximation of the original (here is where the lossy part is)
-4. **huffman encoding**: (entropy coding) eliminate long runs of zeros
+### **Quantization**
 
-_Markers_ are used to break up a JPEG stream into its component structures. They are 2 bytes in length with the first byte always being 0xFF, the second byte specifies the type of the marker. Any number of bytes with the value FF16 may be used as a fill character before the start of any marker. A byte in a JPEG stream with a value of FF16 that is followed by another FF16 byte is always ignored. There are 2 kinds of markers. The _stand-alone_ contain no data other than the 2 bytes. _Non-stand-alone_ markers are followed by a 2-byte long value that gives the number of bytes of data the marker contains (including the 2 length bytes, but not the 2 marker bytes).
+This is where the majority of the lossy compression occurs. Each of the 64 frequency coefficients from the DCT is divided by a corresponding value in a quantization table. Quantization tables contain values that are typically higher for high-frequency coefficients, meaning these details are divided by larger numbers and thus lose more precision (become zeros or small integers). The resulting quantized coefficients are integers, many of which become zero, especially for high-frequency components. This step effectively discards less important visual information. The quality setting of a JPEG (e.g., 90% quality) directly influences the values in these quantization tables. Higher quality means smaller quantization values, less loss, and larger file sizes.
 
-![Markers](README_resources/markers.png)
+### **Zigzag Scan** 
 
-### JFIF files
+The 64 quantized coefficients in each 8x8 block are rearranged into a one-dimensional sequence using a zigzag pattern. This pattern groups low-frequency coefficients (which tend to have larger values and are more significant) together at the beginning of the sequence, followed by runs of zeros for the high-frequency coefficients. This reordering is crucial for the next compression step.
 
-For all practical purposes a JPEG file means a JPEG file in JFIF format.
+<img src="README_resources/img.png" alt="The zigzag path in a block" style="display: block; margin: 0 auto;">
 
-![JFIF structure](README_resources/jfif_structure.png)
+### **Run-Length Encoding (RLE)**
 
-![img.png](README_resources/img.png)
+After the zigzag scan, the sequence of coefficients often contains long runs of zeros. RLE is applied to compress these runs. It typically encodes (skip, value) pairs, where "skip" is the number of preceding zeros and "value" is the next non-zero coefficient. An "End of Block" (EOB) marker is used to signify that all remaining coefficients in the block are zero. For the DC coefficients (the first coefficient of each block), a differential encoding is used: the DC coefficient of the current block is encoded as the difference from the DC coefficient of the previous block. This exploits the strong correlation between adjacent block DC values.
 
-![img_1.png](README_resources/img_1.png)
+<img src="README_resources/img_1.png" alt="The RLE procedure" style="display: block; margin: 0 auto;">
 
-![img_2.png](README_resources/img_2.png)
+### **Huffman Coding** 
+   The final stage of entropy encoding uses Huffman coding. Huffman coding is a variable-length coding scheme where more frequently occurring symbols (e.g., common RLE pairs, DC differences, EOB markers) are assigned shorter bit codes, while less frequent symbols get longer codes. Standard Huffman tables are often used, but custom tables can also be generated based on the image's specific data for potentially better compression. This step is lossless; it only reduces the file size by using more efficient bit representations.
 
-![img_3.png](README_resources/img_3.png)
+### **JPEG File Structure**
+
+Finally, all the compressed data for Y, Cb, and Cr components, along with necessary metadata, are assembled into a JPEG file. A JPEG file typically includes:
+- Markers: Special byte sequences that indicate the start/end of the image, sections, etc. crucial for a decoder to correctly parse the file and understand its structure.
+  <img src="README_resources/img_8.png" alt="JPEG markers" style="display: block; margin: 0 auto;">
+  <img src="README_resources/img_9.png" alt="JPEG markers continued" style="display: block; margin: 0 auto;">
+- Quantization Tables (DQT): The tables used during quantization, which dictate the level of detail preserved for different frequency components.
+  <img src="README_resources/img_6.png" alt="Quantization table" style="display: block; margin: 0 auto;">
+- Huffman Tables (DHT): The tables used for Huffman decoding, essential for decompressing the encoded data back into coefficients.
+  <img src="README_resources/img_5.png" alt="Canonical Huffman table" style="display: block; margin: 0 auto;">
+- Frame Header (SOF): Fundamental image properties like dimensions, color components, and precision. 
+- Scan Data (SOS): The actual compressed bitstream of Y, Cb, and Cr data.
+  <img src="README_resources/img_2.png" alt="The SOS segment" style="display: block; margin: 0 auto;">
+  <img src="README_resources/img_3.png" alt="The SOS segment legend" style="display: block; margin: 0 auto;">
+  <img src="README_resources/img_4.png" alt="The SOS segment legend continuation" style="display: block; margin: 0 auto;">
+These elements collectively form the complete JPEG file, enabling efficient storage and transmission of images.
+
+## **Key Differences and Why JPEG is Smaller**
+
+The primary reasons JPEG files are significantly smaller than BMP files are:
+- Lossy Compression: JPEG discards information, especially in the chroma components and high-frequency details, which is imperceptible to the human eye. BMP retains all information. 
+- Color Space Transformation: YCbCr is more amenable to compression techniques. 
+- Chroma Subsampling: Reduces the amount of color data by typically 50% or 75%. 
+- Frequency Domain Transformation (DCT): Allows for selective discarding of less important frequency information. 
+- Quantization: The core lossy step, rounding off-frequency coefficients. 
+- Entropy Encoding (RLE & Huffman): Efficiently compresses the remaining data without further loss.
+
+## Conclusion 
+
+The conversion from BMP to JPEG is a sophisticated process that leverages human visual perception to achieve impressive compression ratios. By transforming pixel data into frequency components, quantizing them, and then applying various encoding techniques, JPEG effectively balances image quality with file size, making it ideal for web images and digital photography where storage and bandwidth are concerns.
 
 ## Bibliography
 
@@ -119,10 +108,13 @@ For all practical purposes a JPEG file means a JPEG file in JFIF format.
 4. [SDL Wiki - for debugging](https://wiki.libsdl.org/SDL2/SDL_PixelFormatEnum)
 5. [JPEG Official Documentation](https://jpeg.org/jpeg/)
 6. [JPEG Wiki](https://en.wikipedia.org/wiki/JPEG)
-7. [*Compressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](README_resources/book.pdf), Addison Wesley, 1999
+7. [*Compressed Image File Formats JPEG, PNG, GIF, XBM, BMP. Your guideline to graphics files on the Web*, John Miano](README_resources/book1.pdf), Addison Wesley, 1999
 8. [Branch Education YouTube video](https://www.youtube.com/watch?v=Kv1Hiv3ox8I&list=WL&index=16&ab_channel=BranchEducation)
 9. [JFIF File Interchange Format, Version 1.02](https://web.archive.org/web/20120301195630/http:/www.jpeg.org/public/jfif.pdf)
-10. https://www.sciencedirect.com/topics/computer-science/quantization-table
-11. https://www.sciencedirect.com/book/9780124157606/digital-video-processing-for-engineers
-12. https://cgjennings.ca/articles/jpeg-compression/
-13. https://www.thewebmaster.com/jpeg-definitive-guide/
+10. [Webpage - quantization table](https://www.sciencedirect.com/topics/computer-science/quantization-table)
+11. [Digital Video Processing for engineers, Suhel Dhanani, Michael Parker](README_resources/book2.pdf)
+12. [Webpage - jpeg compression](https://cgjennings.ca/articles/jpeg-compression/)
+13. [Webpage - jpeg definitive guide](https://www.thewebmaster.com/jpeg-definitive-guide/)
+14. [Purdue University JPEG Lab Guide](README_resources/lab.pdf)
+15. [INFORMATION TECHNOLOGY – DIGITAL COMPRESSION AND CODING OF CONTINUOUS-TONE STILL IMAGES – REQUIREMENTS AND GUIDELINES, CCIT](README_resources/itu-t81.pdf)
+16. [This PPT presentation](README_resources/presentation.pdf)
