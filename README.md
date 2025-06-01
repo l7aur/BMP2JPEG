@@ -34,7 +34,7 @@ JPEG compression works more efficiently in the YCbCr color space than in RGB.
 - **Cr** (Chroma Red):S Represents the red-green difference.
 Each RGB pixel is converted to a YCbCr triplet using specific mathematical formulas. The Y, Cb, and Cr values are typically shifted so they are centered around 0 (e.g., Y from 0-255, Cb/Cr from -128 to 127 or 0-255 with an offset).
 
-<img src="README_resources/img_10.png" alt="The YCbCr decomposition" style="display: block; margin: 0 auto;">
+<img src="README_resources/img_10.png" alt="The YCbCr decomposition" class="center">
 
 ### **Chroma Subsampling**
 
@@ -48,7 +48,8 @@ This step significantly reduces the amount of color data to be processed, contri
 ### **Discrete Cosine Transform (DCT)**
 
 After color space conversion and subsampling, each Y, Cb, and Cr component is divided into non-overlapping 8x8 pixel blocks. The DCT is then applied to each of these 8x8 blocks. The DCT transforms the pixel data from the spatial domain (pixel values) to the frequency domain (frequency coefficients).  The top-left coefficient (0,0) is the DC coefficient, representing the average value (or overall intensity) of the 8x8 block.  The remaining 63 coefficients are AC coefficients, representing higher frequency variations (details, textures, edges) within the block.
-<img src="README_resources/img_7.png" alt="The DCT matrix" style="display: block; margin: 0 auto;">
+
+<img src="README_resources/img_7.png" alt="The DCT matrix" class="center">
 
 ### **Quantization**
 
@@ -58,13 +59,13 @@ This is where the majority of the lossy compression occurs. Each of the 64 frequ
 
 The 64 quantized coefficients in each 8x8 block are rearranged into a one-dimensional sequence using a zigzag pattern. This pattern groups low-frequency coefficients (which tend to have larger values and are more significant) together at the beginning of the sequence, followed by runs of zeros for the high-frequency coefficients. This reordering is crucial for the next compression step.
 
-<img src="README_resources/img.png" alt="The zigzag path in a block" style="display: block; margin: 0 auto;">
+<img src="README_resources/img.png" alt="The zigzag path in a block" class="center">
 
 ### **Run-Length Encoding (RLE)**
 
 After the zigzag scan, the sequence of coefficients often contains long runs of zeros. RLE is applied to compress these runs. It typically encodes (skip, value) pairs, where "skip" is the number of preceding zeros and "value" is the next non-zero coefficient. An "End of Block" (EOB) marker is used to signify that all remaining coefficients in the block are zero. For the DC coefficients (the first coefficient of each block), a differential encoding is used: the DC coefficient of the current block is encoded as the difference from the DC coefficient of the previous block. This exploits the strong correlation between adjacent block DC values.
 
-<img src="README_resources/img_1.png" alt="The RLE procedure" style="display: block; margin: 0 auto;">
+<img src="README_resources/img_1.png" alt="The RLE procedure" class="center">
 
 ### **Huffman Coding** 
    The final stage of entropy encoding uses Huffman coding. Huffman coding is a variable-length coding scheme where more frequently occurring symbols (e.g., common RLE pairs, DC differences, EOB markers) are assigned shorter bit codes, while less frequent symbols get longer codes. Standard Huffman tables are often used, but custom tables can also be generated based on the image's specific data for potentially better compression. This step is lossless; it only reduces the file size by using more efficient bit representations.
@@ -73,17 +74,25 @@ After the zigzag scan, the sequence of coefficients often contains long runs of 
 
 Finally, all the compressed data for Y, Cb, and Cr components, along with necessary metadata, are assembled into a JPEG file. A JPEG file typically includes:
 - Markers: Special byte sequences that indicate the start/end of the image, sections, etc. crucial for a decoder to correctly parse the file and understand its structure.
-  <img src="README_resources/img_8.png" alt="JPEG markers" style="display: block; margin: 0 auto;">
-  <img src="README_resources/img_9.png" alt="JPEG markers continued" style="display: block; margin: 0 auto;">
+  
+  <img src="README_resources/img_8.png" alt="JPEG markers" class="center">
+  <img src="README_resources/img_9.png" alt="JPEG markers continued" class="center">
+
 - Quantization Tables (DQT): The tables used during quantization, which dictate the level of detail preserved for different frequency components.
-  <img src="README_resources/img_6.png" alt="Quantization table" style="display: block; margin: 0 auto;">
+  
+  <img src="README_resources/img_6.png" alt="Quantization table" class="center">
+
 - Huffman Tables (DHT): The tables used for Huffman decoding, essential for decompressing the encoded data back into coefficients.
-  <img src="README_resources/img_5.png" alt="Canonical Huffman table" style="display: block; margin: 0 auto;">
+  
+  <img src="README_resources/img_5.png" alt="Canonical Huffman table" class="center">
+
 - Frame Header (SOF): Fundamental image properties like dimensions, color components, and precision. 
 - Scan Data (SOS): The actual compressed bitstream of Y, Cb, and Cr data.
-  <img src="README_resources/img_2.png" alt="The SOS segment" style="display: block; margin: 0 auto;">
-  <img src="README_resources/img_3.png" alt="The SOS segment legend" style="display: block; margin: 0 auto;">
-  <img src="README_resources/img_4.png" alt="The SOS segment legend continuation" style="display: block; margin: 0 auto;">
+
+  <img src="README_resources/img_2.png" alt="The SOS segment" class="center">
+  <img src="README_resources/img_3.png" alt="The SOS segment legend" class="center">
+  <img src="README_resources/img_4.png" alt="The SOS segment legend continuation" class="center">
+
 These elements collectively form the complete JPEG file, enabling efficient storage and transmission of images.
 
 ## **Key Differences and Why JPEG is Smaller**
