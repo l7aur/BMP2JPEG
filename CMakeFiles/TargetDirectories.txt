@@ -1,0 +1,3 @@
+/home/l7aur/CLionProjects/BMP2JPEG/CMakeFiles/BMP2JPEG.dir
+/home/l7aur/CLionProjects/BMP2JPEG/CMakeFiles/edit_cache.dir
+/home/l7aur/CLionProjects/BMP2JPEG/CMakeFiles/rebuild_cache.dir
