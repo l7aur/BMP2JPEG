@@ -6,9 +6,11 @@
 
 int main(const int argc, char *argv[]) {
     if (argc != 3 && argc != 4) {
-        std::cerr << "Usage: " << argv[0] << " <input_filepath> <output_filepath> <optional --verbose>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <input_filepath> <output_filepath> <optional> --verbose" << std::endl;
         return EXIT_FAILURE;
     }
+
+    std::cout << argv[1] << " " << argv[2] << " " << argv[3] << std::endl;
 
     BMP bmpImg(argv[1]);
     int status = bmpImg.isOpen();
